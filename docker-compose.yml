@@ -1,0 +1,14 @@
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  world-engine:
+    build: .
+    depends_on:
+      - mqtt-broker
+    environment:
+      - MQTT_BROKER_HOST=mqtt-broker
