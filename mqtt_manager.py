@@ -24,7 +24,7 @@ class MQTTManager:
     async def publish(self, topic: str, payload: dict, qos: int = 1):
         #Publishes a dictionary as a JSON string
         if self.is_connected:
-            # Must convert dict to JSON string for the broker
+            # converting dictionary to JSON string for the broker
             json_payload = json.dumps(payload)
             self.client.publish(topic, json_payload, qos=qos)
         else:
