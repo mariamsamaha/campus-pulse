@@ -1,0 +1,42 @@
+# campus-pulse simulation settings
+# All values can be overridden via environment variables or a .env file.
+
+simulation:
+  building_id: "b01"
+  num_floors: 10
+  rooms_per_floor: 20          # 10 * 20 = 200 rooms; set to 50 for 1000 rooms
+  tick_interval: 5.0           # seconds between each physics tick
+  max_jitter: 5.0              # random startup delay per room (seconds)
+  heartbeat_every: 5           # every N ticks emit a heartbeat
+
+thermal:
+  alpha: 0.01                  # heat-transfer coefficient (leakage to outside)
+  beta: 0.20                   # HVAC effectiveness coefficient
+
+database:
+  path: "campus_pulse.db"
+  sync_interval: 30            # seconds between periodic DB flushes (30-60 range)
+  dirty_threshold: 10          # also flush if ≥ N rooms are dirty, regardless of timer
+
+faults:
+  enabled: true
+  probability: 0.02            # per-room, per-tick chance of activating a fault
+  recovery_probability: 0.10   # per-room, per-tick chance of recovering from a fault
+  types:
+    sensor_drift:
+      weight: 3                # relative weight among fault types
+      max_drift: 2.0           # max °C / % drift applied per tick
+    frozen_sensor:
+      weight: 2
+    telemetry_delay:
+      weight: 2
+      max_delay: 20.0          # seconds
+    node_dropout:
+      weight: 3
+      max_silence: 60.0        # seconds a node can stay silent
+
+mqtt:
+  broker_host: "localhost"     # overridden by MQTT_BROKER_HOST env var
+  broker_port: 1883
+  client_id: "campus_engine"
+  qos: 1

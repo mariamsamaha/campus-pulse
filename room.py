@@ -24,13 +24,16 @@ DAY_OUTSIDE_TEMP   = 32.0
 NIGHT_OUTSIDE_TEMP = 20.0
 
 @dataclass
-class RoomState:      # snapshot for room state
-    room_id:      str
-    last_temp:    float
+class RoomState:        # complete snapshot for persistence
+    room_id:       str
+    last_temp:     float
     last_humidity: float
-    hvac_mode:    str
-    target_temp:  float
-    last_update:  int
+    hvac_mode:     str
+    target_temp:   float
+    last_update:   int
+    # Extended fields — enable full continuity after restart
+    occupancy:    bool = False
+    light_level:  int  = 50
 
 class Room:         # represents a single iot node
     def __init__(
@@ -185,6 +188,8 @@ class Room:         # represents a single iot node
             hvac_mode     = self.hvac_mode,
             target_temp   = self.target_temp,
             last_update   = int(time.time()),
+            occupancy     = self.occupancy,
+            light_level   = self.light_level,
         )
 
     def __repr__(self) -> str:
