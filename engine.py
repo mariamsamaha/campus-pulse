@@ -1,10 +1,12 @@
 import asyncio
 import json
 import logging
+import os
 import random
 import time
 
 from room import Room 
+from mqtt_manager import MQTTManager
 
 #Logging 
 logging.basicConfig(
@@ -21,11 +23,12 @@ TICK_INTERVAL   = 5.0
 MAX_JITTER      = 5.0    
 HEARTBEAT = 5   
 
-
-#Mock MQTT publisher 
-# will be replaced with a real gmqtt publish call.
-async def mock_publish(topic: str, payload: dict) -> None:
-    logger.debug("PUBLISH → %s | %s", topic, json.dumps(payload))
+# MQTT Manager
+mqtt_manager = MQTTManager(
+    broker_host=os.environ.get('MQTT_BROKER_HOST', 'localhost'),
+    broker_port=1883,
+    client_id="campus_engine"
+)
 
 
 #Fleet builder
@@ -81,11 +84,13 @@ async def room_task(room: Room, sim_start: float) -> None:
             )
             payload = room.telemetry_payload()
             topic   = f"{room.mqtt_path}/telemetry"
-            await mock_publish(topic, payload)
+            # await mock_publish(topic, payload)
+            await mqtt_manager.publish(topic, payload)
 
             if tick_count % HEARTBEAT == 0:
                 hb_topic = f"{room.mqtt_path}/heartbeat"
-                await mock_publish(hb_topic, room.heartbeat_payload())
+                # await mock_publish(hb_topic, room.heartbeat_payload())
+                await mqtt_manager.publish(hb_topic, room.heartbeat_payload())
 
         except Exception as exc:
             logger.error(
@@ -103,6 +108,9 @@ async def room_task(room: Room, sim_start: float) -> None:
 async def run_engine() -> None:
     sim_start = time.time()
     logger.info("Engine starting at epoch %d", int(sim_start))
+    
+    await mqtt_manager.connect()
+    
     rooms = build_fleet()
 
     tasks = [
