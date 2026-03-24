@@ -1,2 +1,5 @@
 gmqtt
 aiosqlite
+pyyaml
+python-dotenv
+psutil
