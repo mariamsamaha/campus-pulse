@@ -33,10 +33,6 @@ class MQTTManager:
     async def disconnect(self):
         await self.client.disconnect()
 
-    async def publish_heartbeat(self, sensor_id):
-        topic = 'home/heartbeat'
-        payload = f'Sensor {sensor_id} is alive at {time.strftime("%Y-%d %H:%M:%S")}'
-        await self.publish(topic, payload)
     
 
 async def main():
