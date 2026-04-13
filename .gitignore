@@ -1,3 +1,20 @@
 .venv
 __pycache__
 .env
+.DS_Store
+.vscode
+.idea
+
+# Infrastructure runtime data (Docker volumes) — do NOT commit
+infrastructure/thingsboard/data/
+infrastructure/thingsboard/logs/
+infrastructure/hivemq/data/
+infrastructure/hivemq/logs/
+
+# Generated cert files (contain private keys) — do NOT commit
+infrastructure/certs/*.key
+infrastructure/certs/*.crt
+infrastructure/certs/*.csr
+infrastructure/certs/*.jks
+infrastructure/certs/*.srl
+# ↑ The exports/ directory IS committed (submission artifacts)

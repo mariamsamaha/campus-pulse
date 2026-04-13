@@ -1,0 +1,1062 @@
+[
+  {
+    "name": "Building B01",
+    "type": "Building",
+    "id": "751df080-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Smart Campus",
+    "type": "Campus",
+    "id": "750ab6a0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 0",
+    "type": "Floor",
+    "id": "752654f0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 1",
+    "type": "Floor",
+    "id": "75e89380-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 2",
+    "type": "Floor",
+    "id": "767199a0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 3",
+    "type": "Floor",
+    "id": "76ed5950-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 4",
+    "type": "Floor",
+    "id": "779f9250-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 5",
+    "type": "Floor",
+    "id": "781f2290-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 6",
+    "type": "Floor",
+    "id": "788ead40-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 7",
+    "type": "Floor",
+    "id": "78f621a0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 8",
+    "type": "Floor",
+    "id": "79651010-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Floor 9",
+    "type": "Floor",
+    "id": "79cd20b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-00",
+    "type": "Room",
+    "id": "752e9250-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-01",
+    "type": "Room",
+    "id": "7548d110-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-02",
+    "type": "Room",
+    "id": "7551f8d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-03",
+    "type": "Room",
+    "id": "755b95c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-04",
+    "type": "Room",
+    "id": "756559c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-05",
+    "type": "Room",
+    "id": "756e3360-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-06",
+    "type": "Room",
+    "id": "757697d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-07",
+    "type": "Room",
+    "id": "75805bd0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-08",
+    "type": "Room",
+    "id": "7588c040-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-09",
+    "type": "Room",
+    "id": "7590fda0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-10",
+    "type": "Room",
+    "id": "759c4840-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-11",
+    "type": "Room",
+    "id": "75a521e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-12",
+    "type": "Room",
+    "id": "75aebed0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-13",
+    "type": "Room",
+    "id": "75b65ff0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-14",
+    "type": "Room",
+    "id": "75be2820-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-15",
+    "type": "Room",
+    "id": "75c55410-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-16",
+    "type": "Room",
+    "id": "75cd1c40-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-17",
+    "type": "Room",
+    "id": "75d3abf0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-18",
+    "type": "Room",
+    "id": "75da62b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 0-19",
+    "type": "Room",
+    "id": "75e16790-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-00",
+    "type": "Room",
+    "id": "75ebc7d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-01",
+    "type": "Room",
+    "id": "75f39000-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-02",
+    "type": "Room",
+    "id": "75fa94e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-03",
+    "type": "Room",
+    "id": "760172b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-04",
+    "type": "Room",
+    "id": "76087790-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-05",
+    "type": "Room",
+    "id": "760fca90-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-06",
+    "type": "Room",
+    "id": "76163330-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-07",
+    "type": "Room",
+    "id": "761c9bd0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-08",
+    "type": "Room",
+    "id": "7622dd60-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-09",
+    "type": "Room",
+    "id": "76299420-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-10",
+    "type": "Room",
+    "id": "763023d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-11",
+    "type": "Room",
+    "id": "76381310-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-12",
+    "type": "Room",
+    "id": "763ea2c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-13",
+    "type": "Room",
+    "id": "7646e020-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-14",
+    "type": "Room",
+    "id": "764cd390-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-15",
+    "type": "Room",
+    "id": "7652ee10-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-16",
+    "type": "Room",
+    "id": "765956b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-17",
+    "type": "Room",
+    "id": "765ed4f0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-18",
+    "type": "Room",
+    "id": "7664a150-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 1-19",
+    "type": "Room",
+    "id": "766b09f0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-00",
+    "type": "Room",
+    "id": "7674f500-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-01",
+    "type": "Room",
+    "id": "767b5da0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-02",
+    "type": "Room",
+    "id": "7680dbe0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-03",
+    "type": "Room",
+    "id": "7686f660-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-04",
+    "type": "Room",
+    "id": "768c74a0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-05",
+    "type": "Room",
+    "id": "76932b60-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-06",
+    "type": "Room",
+    "id": "7699e220-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-07",
+    "type": "Room",
+    "id": "769fae80-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-08",
+    "type": "Room",
+    "id": "76a63e30-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-09",
+    "type": "Room",
+    "id": "76abe380-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-10",
+    "type": "Room",
+    "id": "76b1fe00-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-11",
+    "type": "Room",
+    "id": "76b81880-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-12",
+    "type": "Room",
+    "id": "76be0bf0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-13",
+    "type": "Room",
+    "id": "76c42670-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-14",
+    "type": "Room",
+    "id": "76cab620-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-15",
+    "type": "Room",
+    "id": "76d0a990-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-16",
+    "type": "Room",
+    "id": "76d600c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-17",
+    "type": "Room",
+    "id": "76dba610-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-18",
+    "type": "Room",
+    "id": "76e1c090-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 2-19",
+    "type": "Room",
+    "id": "76e73ed0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-00",
+    "type": "Room",
+    "id": "76f01870-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-01",
+    "type": "Room",
+    "id": "76f87ce0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-02",
+    "type": "Room",
+    "id": "77009330-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-03",
+    "type": "Room",
+    "id": "770bddd0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-04",
+    "type": "Room",
+    "id": "7714b770-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-05",
+    "type": "Room",
+    "id": "771c3180-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-06",
+    "type": "Room",
+    "id": "772447d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-07",
+    "type": "Room",
+    "id": "773b2b30-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-08",
+    "type": "Room",
+    "id": "77453d50-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-09",
+    "type": "Room",
+    "id": "774d2c90-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-10",
+    "type": "Room",
+    "id": "7754f4c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-11",
+    "type": "Room",
+    "id": "775b0f40-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-12",
+    "type": "Room",
+    "id": "77606670-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-13",
+    "type": "Room",
+    "id": "7765e4b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-14",
+    "type": "Room",
+    "id": "776cc280-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-15",
+    "type": "Room",
+    "id": "7771cb90-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-16",
+    "type": "Room",
+    "id": "7777e610-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-17",
+    "type": "Room",
+    "id": "777d3d40-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-18",
+    "type": "Room",
+    "id": "778309a0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 3-19",
+    "type": "Room",
+    "id": "7793f990-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-00",
+    "type": "Room",
+    "id": "77a27880-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-01",
+    "type": "Room",
+    "id": "77a7a8a0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-02",
+    "type": "Room",
+    "id": "77aead80-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-03",
+    "type": "Room",
+    "id": "77b58b51-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-04",
+    "type": "Room",
+    "id": "77bb57b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-05",
+    "type": "Room",
+    "id": "77c0fd00-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-06",
+    "type": "Room",
+    "id": "77c67b40-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-07",
+    "type": "Room",
+    "id": "77cbd270-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-08",
+    "type": "Room",
+    "id": "77d177c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-09",
+    "type": "Room",
+    "id": "77d71d10-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-10",
+    "type": "Room",
+    "id": "77e7bee0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-11",
+    "type": "Room",
+    "id": "77ef11e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-12",
+    "type": "Room",
+    "id": "77f41af0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-13",
+    "type": "Room",
+    "id": "77fa5c80-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-14",
+    "type": "Room",
+    "id": "77ff8ca0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-15",
+    "type": "Room",
+    "id": "780495b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-16",
+    "type": "Room",
+    "id": "780a13f0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-17",
+    "type": "Room",
+    "id": "780f6b20-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-18",
+    "type": "Room",
+    "id": "7814c250-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 4-19",
+    "type": "Room",
+    "id": "781a1980-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-00",
+    "type": "Room",
+    "id": "78214570-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-01",
+    "type": "Room",
+    "id": "78275ff0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-02",
+    "type": "Room",
+    "id": "782c41f0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-03",
+    "type": "Room",
+    "id": "78328380-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-04",
+    "type": "Room",
+    "id": "78384fe0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-05",
+    "type": "Room",
+    "id": "783e4350-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-06",
+    "type": "Room",
+    "id": "7843c190-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-07",
+    "type": "Room",
+    "id": "7849b500-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-08",
+    "type": "Room",
+    "id": "784f8160-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-09",
+    "type": "Room",
+    "id": "7855ea00-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-10",
+    "type": "Room",
+    "id": "785c2b90-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-11",
+    "type": "Room",
+    "id": "78624610-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-12",
+    "type": "Room",
+    "id": "78677630-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-13",
+    "type": "Room",
+    "id": "786c5830-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-14",
+    "type": "Room",
+    "id": "78711320-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-15",
+    "type": "Room",
+    "id": "7875ce10-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-16",
+    "type": "Room",
+    "id": "787b4c50-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-17",
+    "type": "Room",
+    "id": "78800740-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-18",
+    "type": "Room",
+    "id": "7884e940-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 5-19",
+    "type": "Room",
+    "id": "7889f250-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-00",
+    "type": "Room",
+    "id": "78914550-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-01",
+    "type": "Room",
+    "id": "7898e670-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-02",
+    "type": "Room",
+    "id": "789e3da0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-03",
+    "type": "Room",
+    "id": "78a2aa70-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-04",
+    "type": "Room",
+    "id": "78a828b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-05",
+    "type": "Room",
+    "id": "78ad0ab0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-06",
+    "type": "Room",
+    "id": "78b17780-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-07",
+    "type": "Room",
+    "id": "78b68090-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-08",
+    "type": "Room",
+    "id": "78bb6290-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-09",
+    "type": "Room",
+    "id": "78c04490-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-10",
+    "type": "Room",
+    "id": "78c574b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-11",
+    "type": "Room",
+    "id": "78caa4d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-12",
+    "type": "Room",
+    "id": "78cf5fc0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-13",
+    "type": "Room",
+    "id": "78d48fe0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-14",
+    "type": "Room",
+    "id": "78d971e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-15",
+    "type": "Room",
+    "id": "78dea200-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-16",
+    "type": "Room",
+    "id": "78e3ab10-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-17",
+    "type": "Room",
+    "id": "78e83ef0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-18",
+    "type": "Room",
+    "id": "78ecd2d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 6-19",
+    "type": "Room",
+    "id": "78f166b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-00",
+    "type": "Room",
+    "id": "78fb2ab0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-01",
+    "type": "Room",
+    "id": "79042b60-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-02",
+    "type": "Room",
+    "id": "79095b80-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-03",
+    "type": "Room",
+    "id": "79101240-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-04",
+    "type": "Room",
+    "id": "79176540-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-05",
+    "type": "Room",
+    "id": "791c9560-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-06",
+    "type": "Room",
+    "id": "7920db20-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-07",
+    "type": "Room",
+    "id": "79259610-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-08",
+    "type": "Room",
+    "id": "792a02e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-09",
+    "type": "Room",
+    "id": "792e6fb0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-10",
+    "type": "Room",
+    "id": "7933c6e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-11",
+    "type": "Room",
+    "id": "7938cff0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-12",
+    "type": "Room",
+    "id": "793d3cc0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-13",
+    "type": "Room",
+    "id": "79421ec0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-14",
+    "type": "Room",
+    "id": "794700c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-15",
+    "type": "Room",
+    "id": "794c09d0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-16",
+    "type": "Room",
+    "id": "795112e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-17",
+    "type": "Room",
+    "id": "7955f4e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-18",
+    "type": "Room",
+    "id": "795afdf0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 7-19",
+    "type": "Room",
+    "id": "795fb8e0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-00",
+    "type": "Room",
+    "id": "79681d50-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-01",
+    "type": "Room",
+    "id": "796de9b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-02",
+    "type": "Room",
+    "id": "79722f70-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-03",
+    "type": "Room",
+    "id": "7977d4c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-04",
+    "type": "Room",
+    "id": "797da120-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-05",
+    "type": "Room",
+    "id": "79831f60-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-06",
+    "type": "Room",
+    "id": "7987b340-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-07",
+    "type": "Room",
+    "id": "798c2010-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-08",
+    "type": "Room",
+    "id": "79917740-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-09",
+    "type": "Room",
+    "id": "79965940-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-10",
+    "type": "Room",
+    "id": "799c73c0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-11",
+    "type": "Room",
+    "id": "79a378a0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-12",
+    "type": "Room",
+    "id": "79a80c80-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-13",
+    "type": "Room",
+    "id": "79ac7950-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-14",
+    "type": "Room",
+    "id": "79b1a970-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-15",
+    "type": "Room",
+    "id": "79b66460-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-16",
+    "type": "Room",
+    "id": "79bad130-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-17",
+    "type": "Room",
+    "id": "79bf8c20-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-18",
+    "type": "Room",
+    "id": "79c46e20-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 8-19",
+    "type": "Room",
+    "id": "79c8daf0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-00",
+    "type": "Room",
+    "id": "79cf4390-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-01",
+    "type": "Room",
+    "id": "79d38950-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-02",
+    "type": "Room",
+    "id": "79d86b50-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-03",
+    "type": "Room",
+    "id": "79dcb110-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-04",
+    "type": "Room",
+    "id": "79e3dd00-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-05",
+    "type": "Room",
+    "id": "79ecddb0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-06",
+    "type": "Room",
+    "id": "79f2d120-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-07",
+    "type": "Room",
+    "id": "79f76500-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-08",
+    "type": "Room",
+    "id": "79fdf4b0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-09",
+    "type": "Room",
+    "id": "7a034be0-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-10",
+    "type": "Room",
+    "id": "7a074380-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-11",
+    "type": "Room",
+    "id": "7a0b6230-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-12",
+    "type": "Room",
+    "id": "7a0ff610-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-13",
+    "type": "Room",
+    "id": "7a154d40-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-14",
+    "type": "Room",
+    "id": "7a1a2f40-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-15",
+    "type": "Room",
+    "id": "7a1ec320-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-16",
+    "type": "Room",
+    "id": "7a23cc30-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-17",
+    "type": "Room",
+    "id": "7a2ad110-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-18",
+    "type": "Room",
+    "id": "7a3bc100-374a-11f1-aa0d-7fe533f2e765"
+  },
+  {
+    "name": "Room 9-19",
+    "type": "Room",
+    "id": "7a402dd0-374a-11f1-aa0d-7fe533f2e765"
+  }
+]

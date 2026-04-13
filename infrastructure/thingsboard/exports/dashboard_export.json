@@ -1,0 +1,580 @@
+{
+  "title": "Campus Pulse Dashboard",
+  "image": null,
+  "mobileHide": false,
+  "mobileOrder": null,
+  "configuration": {
+    "description": "Campus Pulse real-time IoT dashboard",
+    "widgets": {
+      "b745e648-cddb-45f1-9574-4175e25acde7": {
+        "id": "b745e648-cddb-45f1-9574-4175e25acde7",
+        "typeFullFqn": "default-widgets-bundle.alarms-table",
+        "type": "alarm",
+        "sizeX": 24,
+        "sizeY": 5,
+        "row": 0,
+        "col": 0,
+        "config": {
+          "title": "\ud83d\udea8 Active Alarms",
+          "showTitle": true,
+          "backgroundColor": "#ffebee",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE",
+                  "ACKNOWLEDGED"
+                ]
+              }
+            }
+          ],
+          "alarmStatusList": [
+            "ACTIVE",
+            "ACKNOWLEDGED"
+          ],
+          "alarmSeverityList": [
+            "CRITICAL",
+            "MAJOR",
+            "WARNING"
+          ],
+          "settings": {
+            "displayDetails": true,
+            "allowClear": true
+          }
+        }
+      },
+      "671c870f-5c0b-4e1d-986d-b86a092f026b": {
+        "id": "671c870f-5c0b-4e1d-986d-b86a092f026b",
+        "typeFullFqn": "default-widgets-bundle.radial-gauge",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 5,
+        "row": 5,
+        "col": 0,
+        "config": {
+          "title": "\ud83c\udf21 Temperature (\u00b0C)",
+          "showTitle": true,
+          "backgroundColor": "#e3f2fd",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [
+                {
+                  "name": "temperature",
+                  "type": "timeseries",
+                  "label": "Temperature",
+                  "color": "#8dd127",
+                  "settings": {}
+                }
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
+            }
+          ],
+          "settings": {
+            "minValue": 0,
+            "maxValue": 50,
+            "gaugeType": "arc",
+            "levelColors": [
+              "#4caf50",
+              "#ff9800",
+              "#f44336"
+            ],
+            "neonGlowBrightness": 0
+          }
+        }
+      },
+      "e98d89cd-cce7-47d7-b982-778bda58e36d": {
+        "id": "e98d89cd-cce7-47d7-b982-778bda58e36d",
+        "typeFullFqn": "default-widgets-bundle.basic-timeseries",
+        "type": "timeseries",
+        "sizeX": 10,
+        "sizeY": 5,
+        "row": 5,
+        "col": 6,
+        "config": {
+          "title": "\ud83d\udca7 Humidity Trend (%)",
+          "showTitle": true,
+          "backgroundColor": "#f3e5f5",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [
+                {
+                  "name": "humidity",
+                  "type": "timeseries",
+                  "label": "Humidity",
+                  "color": "#7219c4",
+                  "settings": {}
+                }
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
+            }
+          ],
+          "timewindow": {
+            "displayValue": "6h",
+            "realtime": {
+              "interval": 5000,
+              "timewindowMs": 21600000
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "smoothLines": true
+          }
+        }
+      },
+      "840ea733-9b2c-4543-9c34-1854eb62b080": {
+        "id": "840ea733-9b2c-4543-9c34-1854eb62b080",
+        "typeFullFqn": "default-widgets-bundle.boolean-indicator",
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 5,
+        "row": 5,
+        "col": 16,
+        "config": {
+          "title": "\ud83e\uddd1 Occupancy",
+          "showTitle": true,
+          "backgroundColor": "#e8f5e9",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [
+                {
+                  "name": "occupancy",
+                  "type": "timeseries",
+                  "label": "Occupancy",
+                  "color": "#90ef37",
+                  "settings": {}
+                }
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
+            }
+          ],
+          "settings": {
+            "trueColor": "#4caf50",
+            "falseColor": "#bdbdbd",
+            "trueLabel": "Occupied",
+            "falseLabel": "Empty"
+          }
+        }
+      },
+      "769f1973-6421-4cc5-8b10-6df48a34b3ec": {
+        "id": "769f1973-6421-4cc5-8b10-6df48a34b3ec",
+        "typeFullFqn": "default-widgets-bundle.simple-card",
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 5,
+        "row": 5,
+        "col": 20,
+        "config": {
+          "title": "\ud83d\udca1 Light (lux)",
+          "showTitle": true,
+          "backgroundColor": "#fffde7",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [
+                {
+                  "name": "light_level",
+                  "type": "timeseries",
+                  "label": "Light Level",
+                  "color": "#c4cb30",
+                  "settings": {}
+                }
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
+            }
+          ],
+          "settings": {
+            "labelPosition": "top",
+            "units": "lux"
+          }
+        }
+      },
+      "51a6ef3f-978f-444b-8b94-6866fc1f0e7b": {
+        "id": "51a6ef3f-978f-444b-8b94-6866fc1f0e7b",
+        "typeFullFqn": "default-widgets-bundle.entities-table",
+        "type": "latest",
+        "sizeX": 12,
+        "sizeY": 6,
+        "row": 10,
+        "col": 0,
+        "config": {
+          "title": "\ud83c\udf00 HVAC Mode per Device",
+          "showTitle": true,
+          "backgroundColor": "#fce4ec",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [
+                {
+                  "name": "hvac_mode",
+                  "type": "timeseries",
+                  "label": "Hvac Mode",
+                  "color": "#600a9c",
+                  "settings": {}
+                },
+                {
+                  "name": "temperature",
+                  "type": "timeseries",
+                  "label": "Temperature",
+                  "color": "#8dd127",
+                  "settings": {}
+                }
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
+            }
+          ],
+          "settings": {
+            "displayEntityName": true,
+            "columns": [
+              {
+                "key": "entityName",
+                "title": "Device"
+              },
+              {
+                "key": "hvac_mode",
+                "title": "HVAC Mode"
+              },
+              {
+                "key": "temperature",
+                "title": "Temp (\u00b0C)"
+              }
+            ]
+          }
+        }
+      },
+      "9769b8a5-fb6c-41a8-b2c6-2967e4f7b36b": {
+        "id": "9769b8a5-fb6c-41a8-b2c6-2967e4f7b36b",
+        "typeFullFqn": "default-widgets-bundle.entities-table",
+        "type": "latest",
+        "sizeX": 12,
+        "sizeY": 6,
+        "row": 10,
+        "col": 12,
+        "config": {
+          "title": "\ud83d\udce1 Device Online/Offline Status",
+          "showTitle": true,
+          "backgroundColor": "#e0f7fa",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [
+                {
+                  "name": "active",
+                  "type": "timeseries",
+                  "label": "Active",
+                  "color": "#7cb2c9",
+                  "settings": {}
+                },
+                {
+                  "name": "temperature",
+                  "type": "timeseries",
+                  "label": "Temperature",
+                  "color": "#8dd127",
+                  "settings": {}
+                },
+                {
+                  "name": "humidity",
+                  "type": "timeseries",
+                  "label": "Humidity",
+                  "color": "#7219c4",
+                  "settings": {}
+                }
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
+            }
+          ],
+          "settings": {
+            "displayEntityName": true,
+            "columns": [
+              {
+                "key": "entityName",
+                "title": "Device"
+              },
+              {
+                "key": "active",
+                "title": "Online"
+              },
+              {
+                "key": "temperature",
+                "title": "Temp (\u00b0C)"
+              },
+              {
+                "key": "humidity",
+                "title": "Humidity (%)"
+              }
+            ]
+          }
+        }
+      },
+      "8c6b25ed-d820-401e-a2b1-070312eca818": {
+        "id": "8c6b25ed-d820-401e-a2b1-070312eca818",
+        "typeFullFqn": "default-widgets-bundle.entities-table",
+        "type": "latest",
+        "sizeX": 24,
+        "sizeY": 8,
+        "row": 16,
+        "col": 0,
+        "config": {
+          "title": "\ud83d\udcca Live Telemetry \u2014 All 200 Devices",
+          "showTitle": true,
+          "backgroundColor": "#f9fbe7",
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "alias_all_devices",
+              "dataKeys": [
+                {
+                  "name": "temperature",
+                  "type": "timeseries",
+                  "label": "Temperature",
+                  "color": "#8dd127",
+                  "settings": {}
+                },
+                {
+                  "name": "humidity",
+                  "type": "timeseries",
+                  "label": "Humidity",
+                  "color": "#7219c4",
+                  "settings": {}
+                },
+                {
+                  "name": "occupancy",
+                  "type": "timeseries",
+                  "label": "Occupancy",
+                  "color": "#90ef37",
+                  "settings": {}
+                },
+                {
+                  "name": "light_level",
+                  "type": "timeseries",
+                  "label": "Light Level",
+                  "color": "#c4cb30",
+                  "settings": {}
+                },
+                {
+                  "name": "hvac_mode",
+                  "type": "timeseries",
+                  "label": "Hvac Mode",
+                  "color": "#600a9c",
+                  "settings": {}
+                },
+                {
+                  "name": "active",
+                  "type": "timeseries",
+                  "label": "Active",
+                  "color": "#7cb2c9",
+                  "settings": {}
+                }
+              ],
+              "alarmFilterConfig": {
+                "statusList": [
+                  "ACTIVE"
+                ]
+              }
+            }
+          ],
+          "settings": {
+            "displayEntityName": true,
+            "pageSize": 20,
+            "columns": [
+              {
+                "key": "entityName",
+                "title": "Device"
+              },
+              {
+                "key": "temperature",
+                "title": "Temp (\u00b0C)"
+              },
+              {
+                "key": "humidity",
+                "title": "Humidity (%)"
+              },
+              {
+                "key": "occupancy",
+                "title": "Occupied"
+              },
+              {
+                "key": "light_level",
+                "title": "Light (lux)"
+              },
+              {
+                "key": "hvac_mode",
+                "title": "HVAC"
+              },
+              {
+                "key": "active",
+                "title": "Online"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "states": {
+      "default": {
+        "name": "Campus Overview",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "b745e648-cddb-45f1-9574-4175e25acde7": {
+                "sizeX": 24,
+                "sizeY": 5,
+                "row": 0,
+                "col": 0,
+                "id": "b745e648-cddb-45f1-9574-4175e25acde7"
+              },
+              "671c870f-5c0b-4e1d-986d-b86a092f026b": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 5,
+                "col": 0,
+                "id": "671c870f-5c0b-4e1d-986d-b86a092f026b"
+              },
+              "e98d89cd-cce7-47d7-b982-778bda58e36d": {
+                "sizeX": 10,
+                "sizeY": 5,
+                "row": 5,
+                "col": 6,
+                "id": "e98d89cd-cce7-47d7-b982-778bda58e36d"
+              },
+              "840ea733-9b2c-4543-9c34-1854eb62b080": {
+                "sizeX": 4,
+                "sizeY": 5,
+                "row": 5,
+                "col": 16,
+                "id": "840ea733-9b2c-4543-9c34-1854eb62b080"
+              },
+              "769f1973-6421-4cc5-8b10-6df48a34b3ec": {
+                "sizeX": 4,
+                "sizeY": 5,
+                "row": 5,
+                "col": 20,
+                "id": "769f1973-6421-4cc5-8b10-6df48a34b3ec"
+              },
+              "51a6ef3f-978f-444b-8b94-6866fc1f0e7b": {
+                "sizeX": 12,
+                "sizeY": 6,
+                "row": 10,
+                "col": 0,
+                "id": "51a6ef3f-978f-444b-8b94-6866fc1f0e7b"
+              },
+              "9769b8a5-fb6c-41a8-b2c6-2967e4f7b36b": {
+                "sizeX": 12,
+                "sizeY": 6,
+                "row": 10,
+                "col": 12,
+                "id": "9769b8a5-fb6c-41a8-b2c6-2967e4f7b36b"
+              },
+              "8c6b25ed-d820-401e-a2b1-070312eca818": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 16,
+                "col": 0,
+                "id": "8c6b25ed-d820-401e-a2b1-070312eca818"
+              }
+            },
+            "gridSettings": {
+              "backgroundColor": "#1a1a2e",
+              "backgroundSizeMode": "100%",
+              "columns": 24,
+              "margins": [
+                10,
+                10
+              ],
+              "minimumRowHeight": 20
+            }
+          }
+        }
+      }
+    },
+    "entityAliases": {
+      "alias_all_devices": {
+        "id": "alias_all_devices",
+        "alias": "All Campus Devices",
+        "filter": {
+          "type": "entityType",
+          "resolveMultiple": true,
+          "entityType": "DEVICE"
+        }
+      },
+      "alias_floor_devices": {
+        "id": "alias_floor_devices",
+        "alias": "Floor Devices (MQTT type)",
+        "filter": {
+          "type": "entityType",
+          "resolveMultiple": true,
+          "entityType": "DEVICE"
+        }
+      }
+    },
+    "filters": {},
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "interval": 5000,
+        "timewindowMs": 86400000
+      }
+    }
+  },
+  "name": "Campus Pulse Dashboard",
+  "resources": null,
+  "id": {
+    "entityType": "DASHBOARD",
+    "id": "07a63aa0-374d-11f1-aa0d-7fe533f2e765"
+  },
+  "createdTime": 1776093940554,
+  "tenantId": {
+    "entityType": "TENANT",
+    "id": "79a36380-3748-11f1-8810-371bbd29a27b"
+  },
+  "assignedCustomers": null,
+  "version": 1,
+  "externalId": null
+}

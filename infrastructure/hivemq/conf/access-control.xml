@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<file-rbac-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:noNamespaceSchemaLocation="file-rbac-config.xsd">
+    <users>
+        <user>
+            <id>floor-0-gateway</id>
+            <password>password0</password>
+            <roles>
+                <role-id>floor-0-role</role-id>
+            </roles>
+        </user>
+        <user>
+            <id>floor-1-gateway</id>
+            <password>password1</password>
+            <roles>
+                <role-id>floor-1-role</role-id>
+            </roles>
+        </user>
+        <!-- Repeat for all floors -->
+    </users>
+
+    <roles>
+        <role>
+            <id>floor-0-role</id>
+            <permissions>
+                <permission>
+                    <topic>campus/b01/f0/#</topic>
+                    <publish>ALLOW</publish>
+                    <subscribe>ALLOW</subscribe>
+                </permission>
+                <permission>
+                    <topic>#</topic>
+                    <publish>DENY</publish>
+                    <subscribe>DENY</subscribe>
+                </permission>
+            </permissions>
+        </role>
+        <role>
+            <id>floor-1-role</id>
+            <permissions>
+                <permission>
+                    <topic>campus/b01/f1/#</topic>
+                    <publish>ALLOW</publish>
+                    <subscribe>ALLOW</subscribe>
+                </permission>
+                <permission>
+                    <topic>#</topic>
+                    <publish>DENY</publish>
+                    <subscribe>DENY</subscribe>
+                </permission>
+            </permissions>
+        </role>
+    </roles>
+</file-rbac-config>
