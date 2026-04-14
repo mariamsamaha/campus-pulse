@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import asyncio
 import logging
 import sys
@@ -12,7 +11,6 @@ if str(_PHASE1_DIR) not in sys.path:
     sys.path.insert(0, str(_PHASE1_DIR))
 
 from room import Room         
-
 from dedup import DedupHandler
 from nodes.mqtt_node import MQTTNode
 from nodes.coap_node import CoAPNode

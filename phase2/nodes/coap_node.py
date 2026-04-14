@@ -5,21 +5,18 @@ import logging
 import random
 import time
 from typing import Optional
-
 import aiocoap
 import aiocoap.resource as resource
 from aiocoap import Message, Code
-
 from dedup import DedupHandler
 from telemetry_schema import build_telemetry, build_command_ack
 
 logger = logging.getLogger("coap_node")
 
-COAP_BASE_PORT:  int   = 5683          # first CoAP node port
+COAP_BASE_PORT:  int   = 5683          
 TICK_INTERVAL_S: float = 5.0
 MAX_JITTER_S:    float = 5.0
 COAP_BIND_ADDR:  str   = "127.0.0.1"  
-
 
 def coap_port_for(floor: int, room_num: int) -> int:
     """
@@ -56,7 +53,7 @@ class TelemetryResource(resource.ObservableResource):
 
     def push_update(self) -> None:
         """Called by physics loop to push new readings to all observers."""
-        self.updated_state()    # aiocoap sends notifications automatically
+        self.updated_state()    
 
 class HVACResource(resource.Resource):
     """
@@ -122,7 +119,7 @@ class HVACResource(resource.Resource):
             node.room.set_occupancy(False)
             node.room.light_level = 0
             new_state = "LOCKOUT_ACTIVE"
-            logger.warning("[%s] 🚨 CoAP EMERGENCY LOCKOUT applied", node.node_id)
+            logger.warning("[%s] CoAP EMERGENCY LOCKOUT applied", node.node_id)
 
         else:
             logger.warning("[%s] Unknown CoAP action: '%s'", node.node_id, action)
@@ -214,7 +211,6 @@ class CoAPNode:
         1. Start CoAP server on unique port.
         2. Loop: physics tick → push observable update.
         """
-        # Startup jitter
         jitter = random.uniform(0.0, MAX_JITTER_S)
         logger.debug("[%s] CoAP startup jitter %.2fs (port %d)", self.node_id, jitter, self.port)
         await asyncio.sleep(jitter)
