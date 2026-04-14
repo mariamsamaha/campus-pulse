@@ -1,0 +1,5 @@
+# Install with:  pip install -r requirements_phase2.txt
+gmqtt>=0.6.11           # async MQTT client: persistent TCP, LWT, QoS 0/1/2, callbacks
+aiocoap>=0.4.7          # async CoAP: ObservableResource (RFC 7641), CON/NON/ACK, DTLS
+pyyaml>=6.0             # settings.yml parsing
+aiosqlite>=0.19.0       # async SQLite (used by db.py)
