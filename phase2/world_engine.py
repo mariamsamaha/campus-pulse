@@ -6,7 +6,8 @@ import time
 from pathlib import Path
 from typing import List
 
-_PHASE1_DIR = Path(__file__).parent.parent / "campus-pulse-main"
+# Phase 1 lives in the repo root (parent of this package), not a separate folder.
+_PHASE1_DIR = Path(__file__).resolve().parent.parent
 if str(_PHASE1_DIR) not in sys.path:
     sys.path.insert(0, str(_PHASE1_DIR))
 
