@@ -10,6 +10,10 @@ infrastructure/thingsboard/data/
 infrastructure/thingsboard/logs/
 infrastructure/hivemq/data/
 infrastructure/hivemq/logs/
+phase2/infrastructure/thingsboard/data/
+phase2/infrastructure/thingsboard/logs/
+phase2/infrastructure/hivemq/data/
+phase2/infrastructure/hivemq/logs/
 
 # Generated cert files (contain private keys) — do NOT commit
 infrastructure/certs/*.key
@@ -17,4 +21,9 @@ infrastructure/certs/*.crt
 infrastructure/certs/*.csr
 infrastructure/certs/*.jks
 infrastructure/certs/*.srl
+phase2/infrastructure/certs/*.key
+phase2/infrastructure/certs/*.crt
+phase2/infrastructure/certs/*.csr
+phase2/infrastructure/certs/*.jks
+phase2/infrastructure/certs/*.srl
 # ↑ The exports/ directory IS committed (submission artifacts)
