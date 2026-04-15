@@ -1,0 +1,451 @@
+[
+    {
+        "id": "fa93e58910751fef",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0e56e4f63d51b93b",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r111/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r111",
+        "x": 290,
+        "y": 180,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "40a29e816845fa09",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r112/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r112",
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "08a27bec2e0f0431",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r113/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r113",
+        "x": 288,
+        "y": 295,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "6469c423b67e617c",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r114/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r114",
+        "x": 287,
+        "y": 346,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "44a2a18b183677c2",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r115/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r115",
+        "x": 290,
+        "y": 400,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "0b8ee1617d65f5e4",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r116/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r116",
+        "x": 290,
+        "y": 460,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "2458acfcda72715e",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r117/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r117",
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "b522ac22d13a5ba6",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r118/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r118",
+        "x": 288,
+        "y": 575,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "48f9b181e2dce6fb",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r119/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r119",
+        "x": 287,
+        "y": 626,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "598160f3871b283e",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "GET",
+        "confirmable": true,
+        "observe": true,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r120/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "r120",
+        "x": 290,
+        "y": 680,
+        "wires": [
+            [
+                "32ecabb8ba17a03b"
+            ]
+        ]
+    },
+    {
+        "id": "2aecd8c224a42c1f",
+        "type": "mqtt in",
+        "z": "fa93e58910751fef",
+        "name": "",
+        "topic": "campus/b01/f01/+/cmd",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "03c0878a762646d5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 540,
+        "y": 140,
+        "wires": [
+            [
+                "21c2682911256e16"
+            ]
+        ]
+    },
+    {
+        "id": "32ecabb8ba17a03b",
+        "type": "function",
+        "z": "fa93e58910751fef",
+        "name": "function 1",
+        "func": "let payload = JSON.parse(msg.payload.toString());\nmsg.topic = \"campus/b01/f01/\" + payload.room_id + \"/telemetry\";\nmsg.payload = {\n    timestamp: Math.floor(Date.now() / 1000),\n    sensors: payload.sensors,\n    actuators: payload.actuators\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 400,
+        "wires": [
+            [
+                "20e3fe7a93d7997a"
+            ]
+        ]
+    },
+    {
+        "id": "20e3fe7a93d7997a",
+        "type": "batch",
+        "z": "fa93e58910751fef",
+        "name": "",
+        "mode": "interval",
+        "count": 10,
+        "overlap": 0,
+        "interval": "60",
+        "allowEmptySequence": false,
+        "honourParts": false,
+        "topics": [],
+        "x": 740,
+        "y": 400,
+        "wires": [
+            [
+                "efea8aa241951352"
+            ]
+        ]
+    },
+    {
+        "id": "21c2682911256e16",
+        "type": "switch",
+        "z": "fa93e58910751fef",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "r101",
+                "vt": "global"
+            },
+            {
+                "t": "cont",
+                "v": "r111",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 790,
+        "y": 140,
+        "wires": [
+            [
+                "80ac76ff41e873bb"
+            ],
+            [
+                "cffca26b6b58c7e3"
+            ]
+        ]
+    },
+    {
+        "id": "80ac76ff41e873bb",
+        "type": "mqtt out",
+        "z": "fa93e58910751fef",
+        "name": "",
+        "topic": "campus/b01/f01/status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "03c0878a762646d5",
+        "x": 1010,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "efea8aa241951352",
+        "type": "function",
+        "z": "fa93e58910751fef",
+        "name": "function 2",
+        "func": "let messages = msg.payload; \nlet totalTemp = 0;\nlet totalHum = 0;\nlet roomCount = messages.length;\n\nmessages.forEach(function(m) {\n    // Navigate the project's standard JSON structure\n    totalTemp += m.payload.sensors.temperature;\n    totalHum += m.payload.sensors.humidity;\n});\n\n// Calculate averages\nlet avgTemp = (totalTemp / roomCount).toFixed(2);\nlet avgHum = (totalHum / roomCount).toFixed(2);\n\nmsg.topic = \"campus/b01/f01/status\";\nmsg.payload = {\n    floor: \"01\",\n    timestamp: Math.floor(Date.now() / 1000),\n    avg_temperature: parseFloat(avgTemp),\n    avg_humidity: parseFloat(avgHum),\n    reporting_nodes: roomCount,\n    status: (roomCount >= 20) ? \"Healthy\" : \"Degraded\" // Fleet Health check [cite: 39, 48-50]\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 400,
+        "wires": [
+            [
+                "80ac76ff41e873bb"
+            ]
+        ]
+    },
+    {
+        "id": "cffca26b6b58c7e3",
+        "type": "function",
+        "z": "fa93e58910751fef",
+        "name": "function 3",
+        "func": "let parts = msg.topic.split('/');\nlet floor = parseInt(parts[2].replace('f', '')); // Result: 1\nlet roomIDStr = parts[3]; // Result: \"r113\"\nlet roomNum = parseInt(roomIDStr.replace('r', '')); // Result: 113\n\nlet room_offset = roomNum - 11; \nlet dynamicPort = 5683 + (floor - 1) * 10 + room_offset;\n\nmsg.method = \"PUT\";\nmsg.confirmable = true;\nmsg.url = \"coap://127.0.0.1:\" + dynamicPort + \"/\" + parts[2] + \"/\" + roomIDStr + \"/actuators/hvac\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 180,
+        "wires": [
+            [
+                "13964b32f24d5ca4"
+            ]
+        ]
+    },
+    {
+        "id": "13964b32f24d5ca4",
+        "type": "coap request",
+        "z": "fa93e58910751fef",
+        "method": "PUT",
+        "confirmable": true,
+        "observe": false,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://127.0.0.1:5683-5692/f01/r111/telemetry",
+        "content-format": "text/plain",
+        "raw-buffer": false,
+        "name": "",
+        "x": 1110,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c5b914bc12c83cf",
+        "type": "mqtt in",
+        "z": "fa93e58910751fef",
+        "name": "",
+        "topic": "campus/b01/f01/+/telemetry",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "03c0878a762646d5",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "20e3fe7a93d7997a"
+            ]
+        ]
+    },
+    {
+        "id": "03c0878a762646d5",
+        "type": "mqtt-broker",
+        "name": "test",
+        "broker": "test.mosquitto.org",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a36f2d17b4d46186",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-coap": "0.8.0"
+        }
+    }
+]
