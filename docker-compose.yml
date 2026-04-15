@@ -1,14 +1,149 @@
 services:
-  mqtt-broker:
-    image: eclipse-mosquitto:latest
-    ports:
-      - "1883:1883"
-    volumes:
-      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-
-  world-engine:
-    build: .
-    depends_on:
-      - mqtt-broker
+  # --- MQTT Broker ---
+  hivemq:
+    image: hivemq/hivemq-ce:latest
+    container_name: hivemq
     environment:
-      - MQTT_BROKER_HOST=mqtt-broker
+      # Disable remote JMX to avoid hostname resolution crash inside Docker
+      - JAVA_OPTS=-Dcom.sun.management.jmxremote=false
+    ports:
+      - "1883:1883"   # MQTT TCP
+      - "8883:8883"   # MQTT TLS
+      - "8080:8080"   # HiveMQ Dashboard (Optional)
+    volumes:
+      - ./infrastructure/hivemq/conf:/opt/hivemq/conf
+      - ./infrastructure/hivemq/data:/opt/hivemq/data
+      - ./infrastructure/hivemq/logs:/opt/hivemq/logs
+    networks:
+      - campus-network
+
+  # --- ThingsBoard IoT Platform ---
+  thingsboard:
+    image: thingsboard/tb-postgres:latest
+    container_name: thingsboard
+    ports:
+      - "9090:9090"   # HTTP UI
+      - "1884:1883"   # MQTT (mapped to 1884 externally to avoid conflict with HiveMQ)
+      - "5683:5683/udp" # CoAP
+      - "5684:5684/udp" # CoAPS (DTLS)
+    environment:
+      - TB_QUEUE_TYPE=in-memory
+    volumes:
+      - ./infrastructure/thingsboard/data:/data
+      - ./infrastructure/thingsboard/logs:/var/log/thingsboard
+    networks:
+      - campus-network
+    restart: always
+
+  # --- Node-RED Gateways (10 Instances - 1 per floor) ---
+  # These will be configured by Rehab for protocol translation.
+  # Each instance gets its own volume and FLOOR env var.
+  nodered-floor-0:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-0
+    environment:
+      - FLOOR=0
+    volumes:
+      - ./infrastructure/nodered/floor-0:/data
+    networks:
+      - campus-network
+    depends_on:
+      - hivemq
+      - thingsboard
+
+  nodered-floor-1:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-1
+    environment:
+      - FLOOR=1
+    volumes:
+      - ./infrastructure/nodered/floor-1:/data
+    networks:
+      - campus-network
+    depends_on:
+      - hivemq
+      - thingsboard
+
+  nodered-floor-2:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-2
+    environment:
+      - FLOOR=2
+    volumes:
+      - ./infrastructure/nodered/floor-2:/data
+    networks:
+      - campus-network
+
+  nodered-floor-3:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-3
+    environment:
+      - FLOOR=3
+    volumes:
+      - ./infrastructure/nodered/floor-3:/data
+    networks:
+      - campus-network
+
+  nodered-floor-4:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-4
+    environment:
+      - FLOOR=4
+    volumes:
+      - ./infrastructure/nodered/floor-4:/data
+    networks:
+      - campus-network
+
+  nodered-floor-5:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-5
+    environment:
+      - FLOOR=5
+    volumes:
+      - ./infrastructure/nodered/floor-5:/data
+    networks:
+      - campus-network
+
+  nodered-floor-6:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-6
+    environment:
+      - FLOOR=6
+    volumes:
+      - ./infrastructure/nodered/floor-6:/data
+    networks:
+      - campus-network
+
+  nodered-floor-7:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-7
+    environment:
+      - FLOOR=7
+    volumes:
+      - ./infrastructure/nodered/floor-7:/data
+    networks:
+      - campus-network
+
+  nodered-floor-8:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-8
+    environment:
+      - FLOOR=8
+    volumes:
+      - ./infrastructure/nodered/floor-8:/data
+    networks:
+      - campus-network
+
+  nodered-floor-9:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-9
+    environment:
+      - FLOOR=9
+    volumes:
+      - ./infrastructure/nodered/floor-9:/data
+    networks:
+      - campus-network
+
+networks:
+  campus-network:
+    driver: bridge

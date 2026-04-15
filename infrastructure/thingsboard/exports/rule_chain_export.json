@@ -1,0 +1,401 @@
+{
+  "ruleChain": {
+    "id": {
+      "entityType": "RULE_CHAIN",
+      "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+    },
+    "createdTime": 1776093929396,
+    "tenantId": {
+      "entityType": "TENANT",
+      "id": "79a36380-3748-11f1-8810-371bbd29a27b"
+    },
+    "name": "Campus Pulse Main Logic",
+    "type": "CORE",
+    "firstRuleNodeId": {
+      "entityType": "RULE_NODE",
+      "id": "010880e0-374d-11f1-aa0d-7fe533f2e765"
+    },
+    "root": false,
+    "debugMode": true,
+    "externalId": null,
+    "version": 2,
+    "configuration": null,
+    "additionalInfo": null
+  },
+  "metadata": {
+    "ruleChainId": {
+      "entityType": "RULE_CHAIN",
+      "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+    },
+    "version": 2,
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "010880e0-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929454,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeSwitchNode",
+        "name": "Message Type Switch",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "version": 0
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Routes messages by type: POST_TELEMETRY, ACTIVITY, INACTIVITY",
+          "layoutX": 200,
+          "layoutY": 300
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "0108a7f0-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929455,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Telemetry",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 1,
+        "configuration": {
+          "defaultTTL": 0,
+          "processingSettings": {
+            "type": "ON_EVERY_MESSAGE"
+          }
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Persists all received telemetry to the time-series DB",
+          "layoutX": 500,
+          "layoutY": 150
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "0108a7f1-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929455,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "High Temp Filter (>30\u00b0C)",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "jsScript": "return typeof msg.temperature !== 'undefined' && msg.temperature > 30;"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Passes message if temperature exceeds 30 \u00b0C",
+          "layoutX": 800,
+          "layoutY": 50
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "0108cf00-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929456,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Create High Temp Alarm",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "High Temperature",
+          "severity": "CRITICAL",
+          "propagate": true,
+          "dynamicSeverity": false,
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n  details = JSON.parse(metadata.prevAlarmDetails);\n}\ndetails.temperature = msg.temperature;\ndetails.threshold = 30;\nreturn JSON.stringify(details);"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Creates a CRITICAL alarm when temperature > 30 \u00b0C",
+          "layoutX": 1100,
+          "layoutY": 50
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "0108cf01-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929456,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear High Temp Alarm",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "High Temperature",
+          "alarmDetailsBuildJs": "return JSON.stringify({cleared: true});"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Clears the High Temperature alarm when temp drops back to normal",
+          "layoutX": 1100,
+          "layoutY": 150
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "0108cf02-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929456,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Low Temp Filter (<15\u00b0C)",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "jsScript": "return typeof msg.temperature !== 'undefined' && msg.temperature < 15;"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Passes message if temperature drops below 15 \u00b0C",
+          "layoutX": 800,
+          "layoutY": 300
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "0108f610-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929457,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Create Low Temp Alarm",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "Low Temperature",
+          "severity": "WARNING",
+          "propagate": true,
+          "dynamicSeverity": false,
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n  details = JSON.parse(metadata.prevAlarmDetails);\n}\ndetails.temperature = msg.temperature;\ndetails.threshold = 15;\nreturn JSON.stringify(details);"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Creates a WARNING alarm when temperature < 15 \u00b0C",
+          "layoutX": 1100,
+          "layoutY": 300
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "01091d20-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929458,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear Low Temp Alarm",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "Low Temperature",
+          "alarmDetailsBuildJs": "return JSON.stringify({cleared: true});"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Clears the Low Temperature alarm when temp returns to normal",
+          "layoutX": 1100,
+          "layoutY": 400
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "01091d21-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929458,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Device Offline Alarm",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "Device Offline",
+          "severity": "MAJOR",
+          "propagate": true,
+          "dynamicSeverity": false,
+          "alarmDetailsBuildJs": "return JSON.stringify({event: 'INACTIVITY', deviceName: metadata.deviceName});"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Creates a MAJOR alarm when a device sends an INACTIVITY event",
+          "layoutX": 500,
+          "layoutY": 500
+        }
+      },
+      {
+        "id": {
+          "entityType": "RULE_NODE",
+          "id": "01091d22-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "createdTime": 1776093929458,
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "00ffa740-374d-11f1-aa0d-7fe533f2e765"
+        },
+        "type": "org.thingsboard.rule.engine.action.TbClearAlarmNode",
+        "name": "Clear Offline Alarm",
+        "debugSettings": {
+          "failuresEnabled": true,
+          "allEnabled": false,
+          "allEnabledUntil": 1776094829452
+        },
+        "singletonMode": false,
+        "queueName": null,
+        "configurationVersion": 0,
+        "configuration": {
+          "alarmType": "Device Offline",
+          "alarmDetailsBuildJs": "return JSON.stringify({event: 'ACTIVITY', cleared: true});"
+        },
+        "externalId": null,
+        "additionalInfo": {
+          "description": "Clears the Device Offline alarm when activity resumes",
+          "layoutX": 500,
+          "layoutY": 620
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 1,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 8,
+        "type": "Inactivity Event"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 9,
+        "type": "Activity Event"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 5,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 3,
+        "type": "True"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 4,
+        "type": "False"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 6,
+        "type": "True"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 7,
+        "type": "False"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
