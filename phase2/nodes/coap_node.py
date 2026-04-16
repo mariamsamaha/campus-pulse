@@ -1,5 +1,6 @@
 from __future__ import annotations
 import asyncio
+import hashlib
 import json
 import logging
 import random
@@ -75,57 +76,97 @@ class HVACResource(resource.Resource):
         self._node = node
 
     async def render_put(self, request: Message) -> Message:
-        """Handle a PUT request (CON or NON)."""
+        """Handle a PUT request.
+
+        CoAP Confirmable (CON) reliability:
+          When the sender uses a CON PUT, aiocoap automatically sends an ACK
+          at the transport layer.  If the ACK is lost in transit, the sender
+          retransmits the CON; aiocoap delivers the duplicate to this handler.
+          The application-level dedup cache (keyed on SHA-256 of the payload)
+          detects the duplicate and returns 2.03 Valid — the same semantics
+          as "already processed" — without re-applying the actuator command.
+
+          This satisfies the requirement:
+            CON PUT sent → ACK returned → no duplicate side-effect on retry.
+        """
         node = self._node
+
+        # Stable, deterministic hash: SHA-256 of raw payload bytes
+        cmd_hash = hashlib.sha256(request.payload).hexdigest()[:16]
+
         try:
             cmd = json.loads(request.payload.decode())
         except (json.JSONDecodeError, UnicodeDecodeError):
-            logger.error("[%s] CoAP PUT — invalid JSON payload", node.node_id)
+            logger.error("[%s] CoAP CON PUT — invalid JSON payload", node.node_id)
             return Message(code=Code.BAD_REQUEST, payload=b"Invalid JSON")
 
-        cmd_hash = str(hash(request.payload))
+        action = cmd.get("action", "?")
+
+        logger.info(
+            "[%s] [RELIABILITY] CoAP CON PUT received — action=%s hash=%s",
+            node.node_id, action, cmd_hash,
+        )
+
+        # Application-level dedup: identical CON retransmit → drop
         if node.dedup.is_coap_duplicate(node.node_id, cmd_hash):
-            logger.debug("[%s] CoAP CMD dedup — duplicate CON, returning cached ACK", node.node_id)
+            logger.warning(
+                "[%s] [RELIABILITY] CoAP CON DUPLICATE detected "
+                "(hash=%s) — returning 2.03 Valid, actuator NOT re-applied",
+                node.node_id, cmd_hash,
+            )
             return Message(
                 code=Code.VALID,
                 payload=b"Duplicate - already processed",
             )
 
-        action = cmd.get("action", "").upper()
-        value  = cmd.get("value")
+        value     = cmd.get("value")
         new_state: object = None
 
-        if action == "SET_HVAC":
+        if action.upper() == "SET_HVAC":
             old = node.room.hvac_mode
             node.room.set_hvac(str(value).upper())
             new_state = node.room.hvac_mode
             logger.info(
-                "[%s] ⚡ CoAP Actuator — HVAC %s → %s",
+                "[%s] [RELIABILITY] ⚡ CoAP Actuator applied — HVAC %s → %s",
                 node.node_id, old, node.room.hvac_mode,
             )
 
-        elif action == "SET_TEMP":
+        elif action.upper() == "SET_TEMP":
             node.room.set_target_temp(float(value))
             new_state = node.room.target_temp
-            logger.info("[%s] ⚡ CoAP Actuator — Target temp → %.1f", node.node_id, float(value))
+            logger.info(
+                "[%s] [RELIABILITY] ⚡ CoAP Actuator applied — Target temp → %.1f",
+                node.node_id, float(value),
+            )
 
-        elif action == "SET_OCC":
+        elif action.upper() == "SET_OCC":
             node.room.set_occupancy(bool(value))
             new_state = node.room.occupancy
-            logger.info("[%s] ⚡ CoAP Actuator — Occupancy → %s", node.node_id, bool(value))
+            logger.info(
+                "[%s] [RELIABILITY] ⚡ CoAP Actuator applied — Occupancy → %s",
+                node.node_id, bool(value),
+            )
 
-        elif action == "EMERGENCY_LOCKOUT":
+        elif action.upper() == "EMERGENCY_LOCKOUT":
             node.room.set_hvac("OFF")
             node.room.set_occupancy(False)
             node.room.light_level = 0
             new_state = "LOCKOUT_ACTIVE"
-            logger.warning("[%s] CoAP EMERGENCY LOCKOUT applied", node.node_id)
+            logger.warning(
+                "[%s] [RELIABILITY] ⚡ CoAP EMERGENCY LOCKOUT applied",
+                node.node_id,
+            )
 
         else:
             logger.warning("[%s] Unknown CoAP action: '%s'", node.node_id, action)
             return Message(code=Code.BAD_OPTION, payload=b"Unknown action")
 
-        ack = build_command_ack(node.node_id, action, new_state)
+        ack = build_command_ack(node.node_id, action.upper(), new_state)
+        logger.info(
+            "[%s] [RELIABILITY] CoAP ACK returning 2.04 Changed "
+            "— action=%s new_state=%s hash=%s",
+            node.node_id, action, new_state, cmd_hash,
+        )
         return Message(
             code=Code.CHANGED,
             payload=json.dumps(ack).encode(),

@@ -56,10 +56,16 @@ class MQTTNode:
         self._client: MQTTClient | None = None
 
     def _on_connect(self, client, flags, rc, properties):
-        logger.info("[%s] Connected to HiveMQ (rc=%d)", self.node_id, rc)
+        logger.info(
+            "[%s] [RELIABILITY] Connected to HiveMQ (rc=%d) — subscribing cmd topic with QoS 2 (Exactly-Once)",
+            self.node_id, rc,
+        )
         self.connected = True
         client.subscribe(self.topic_cmd, qos=2)
-        logger.debug("[%s] Subscribed to %s (QoS 2)", self.node_id, self.topic_cmd)
+        logger.info(
+            "[%s] [RELIABILITY] Subscribed: topic=%s  qos=2",
+            self.node_id, self.topic_cmd,
+        )
 
     def _on_disconnect(self, client, packet, exc=None):
         self.connected = False
@@ -69,23 +75,43 @@ class MQTTNode:
         """
         Handles incoming commands (downstream / southbound).
 
-        DUP-flag check:
-          gmqtt passes the raw MQTT packet_id via properties["message_expiry_interval"]
-          or via the gmqtt internal _pid attribute on QoS 1/2 messages.
-          We use a fallback approach: track (client_id, hash-of-payload).
+        QoS-2 / DUP-flag deduplication:
+          gmqtt exposes the MQTT packet_id in properties['packet_id'] for
+          QoS 1 and QoS 2 messages.  For QoS 2 the broker guarantees
+          Exactly-Once delivery at the protocol level (PUBLISH → PUBREC →
+          PUBREL → PUBCOMP handshake), so the DUP flag is never set on a
+          brand-new QoS-2 PUBLISH — only on retransmits during recovery.
+
+          We add an application-level dedup cache keyed on
+          (client_id, packet_id) as a second-layer defence:
+            - Covers retransmits that reach the app callback (e.g. broker
+              restart mid-handshake).
+            - Falls back to a 16-bit hash of the raw payload bytes when
+              packet_id is unavailable (QoS 0, unusual broker behaviour).
         """
         try:
-            packet_id: int | None = properties.get("message_expiry_interval", None)
+            # gmqtt exposes packet_id in properties dict for QoS 1/2
+            packet_id: int | None = properties.get("packet_id", None)
+            # Fallback: use a truncated hash of the raw payload bytes
             payload_hash = hash(payload_bytes) & 0xFFFF
+            dedup_key = packet_id if packet_id is not None else payload_hash
 
-            if self.dedup.is_mqtt_duplicate(self.client_id, packet_id or payload_hash):
-                logger.debug(
-                    "[%s] CMD dropped — DUP flag detected (pkt_id=%s)",
-                    self.node_id, packet_id,
+            # Atomic check-and-register: is_mqtt_duplicate registers the key
+            # if it is new, so a second concurrent callback for the same
+            # packet_id sees it as a duplicate immediately.
+            if self.dedup.is_mqtt_duplicate(self.client_id, dedup_key):
+                logger.warning(
+                    "[%s] [RELIABILITY] CMD DROPPED — duplicate detected "
+                    "(client=%s pkt_id=%s) — no actuator action taken",
+                    self.node_id, self.client_id, dedup_key,
                 )
                 return
+
             cmd = json.loads(payload_bytes.decode())
-            logger.info("[%s] CMD received: %s", self.node_id, cmd)
+            logger.info(
+                "[%s] [RELIABILITY] QoS-2 CMD accepted — pkt_id=%s action=%s",
+                self.node_id, dedup_key, cmd.get("action", "?"),
+            )
             self._dispatch_command(client, cmd)
 
         except json.JSONDecodeError:
@@ -140,13 +166,23 @@ class MQTTNode:
             logger.warning("[%s] Unknown command action: '%s'", self.node_id, action)
 
     def _publish_ack(self, client: MQTTClient, command: str, new_state) -> None:
-        """Publish a command acknowledgement (northbound confirmation)."""
+        """Publish a command acknowledgement (northbound confirmation).
+
+        QoS 2 is used here so the controller (ThingsBoard rule chain) receives
+        the ACK exactly once — matching the QoS 2 guarantee of the inbound
+        command.  Using QoS 1 on the ACK while the CMD uses QoS 2 would create
+        an asymmetric reliability gap.
+        """
         ack = build_command_ack(self.node_id, command, new_state)
         client.publish(
             self.topic_ack,
             json.dumps(ack),
-            qos=1,
+            qos=2,       # RELIABILITY: ACK matches QoS-2 command reliability
             retain=False,
+        )
+        logger.info(
+            "[%s] [RELIABILITY] ACK published — topic=%s action=%s new_state=%s qos=2",
+            self.node_id, self.topic_ack, command, new_state,
         )
 
     def _build_client(self) -> MQTTClient:
