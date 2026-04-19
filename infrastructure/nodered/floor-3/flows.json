@@ -1,0 +1,547 @@
+[
+  {
+    "id": "0be5ade2e8204fc0",
+    "type": "tab",
+    "label": "Floor 03",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "779e7d147195457a",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5703/f03/r311/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r311",
+    "x": 290,
+    "y": 180,
+    "wires": [
+      [
+        "71168a4e64ca4a32",
+        "85c40cc6ba384916"
+      ]
+    ]
+  },
+  {
+    "id": "3e044fff328c4566",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5704/f03/r312/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r312",
+    "x": 290,
+    "y": 240,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "9d57b1ecb5f14474",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5705/f03/r313/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r313",
+    "x": 288,
+    "y": 295,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "8c36d3f16dd8444b",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5706/f03/r314/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r314",
+    "x": 287,
+    "y": 346,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "afffd7c60c1a4543",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5707/f03/r315/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r315",
+    "x": 290,
+    "y": 400,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "e5a4ddcadb534a39",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5708/f03/r316/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r316",
+    "x": 290,
+    "y": 460,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "61bd969961c840b7",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5709/f03/r317/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r317",
+    "x": 290,
+    "y": 520,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "2fc99c71364946ce",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5710/f03/r318/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r318",
+    "x": 288,
+    "y": 575,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "d847a57e8dc64b22",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5711/f03/r319/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r319",
+    "x": 287,
+    "y": 626,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "1b0f70f5c82d4f32",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5712/f03/r320/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r320",
+    "x": 290,
+    "y": 680,
+    "wires": [
+      [
+        "71168a4e64ca4a32"
+      ]
+    ]
+  },
+  {
+    "id": "7222175f2abc4df7",
+    "type": "mqtt in",
+    "z": "0be5ade2e8204fc0",
+    "name": "",
+    "topic": "campus/b01/f03/+/cmd",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "f5f54456e3f82fc6",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 580,
+    "y": 140,
+    "wires": [
+      [
+        "6f99ac7c04834f97"
+      ]
+    ]
+  },
+  {
+    "id": "71168a4e64ca4a32",
+    "type": "function",
+    "z": "0be5ade2e8204fc0",
+    "name": "function 1",
+    "func": "let floorNum = env.get(\"FLOOR\");\nlet fStr = \"f\" + String(floorNum).padStart(2, \"0\");\nlet payload = msg.payload;\nif (typeof payload === \"string\") {\n    try { payload = JSON.parse(payload); }\n    catch(e) { node.warn(\"Could not parse payload: \" + payload); return null; }\n}\nlet sensorId = payload.metadata && payload.metadata.sensor_id;\nif (!sensorId) {\n    node.warn(\"Missing metadata.sensor_id in: \" + JSON.stringify(payload).substring(0, 100));\n    return null;\n}\nlet roomID = sensorId.split(\"-\")[2];\nmsg.topic = `campus/b01/${fStr}/${roomID}/telemetry`;\nmsg.payload = payload;\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 580,
+    "y": 400,
+    "wires": [
+      [
+        "01f427af0f534c2b",
+        "b4c19b79e31c4362"
+      ]
+    ]
+  },
+  {
+    "id": "6f99ac7c04834f97",
+    "type": "switch",
+    "z": "0be5ade2e8204fc0",
+    "name": "",
+    "property": "topic",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "regex",
+        "v": "r3(0[1-9]|10)",
+        "vt": "str",
+        "case": false
+      },
+      {
+        "t": "regex",
+        "v": "r3(1[1-9]|20)",
+        "vt": "str",
+        "case": false
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 2,
+    "x": 790,
+    "y": 140,
+    "wires": [
+      [
+        "75b0a3aeaef34ac1"
+      ],
+      [
+        "2ebf28a50e8e4c72"
+      ]
+    ]
+  },
+  {
+    "id": "75b0a3aeaef34ac1",
+    "type": "mqtt out",
+    "z": "0be5ade2e8204fc0",
+    "name": "hivemq",
+    "topic": "",
+    "qos": "2",
+    "retain": "",
+    "broker": "f5f54456e3f82fc6",
+    "x": 960,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "01f427af0f534c2b",
+    "type": "function",
+    "z": "0be5ade2e8204fc0",
+    "name": "avg calculator",
+    "func": "let store = flow.get('floorReadings') || {};\nlet floorId = 3;\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try { payload = JSON.parse(payload); }\n    catch(e) { node.warn('Parse failed'); return null; }\n}\nlet sensorId = payload.metadata && payload.metadata.sensor_id;\nif (!sensorId) { return null; }\nstore[sensorId] = payload;\nflow.set('floorReadings', store);\nlet lastPublish = flow.get('lastPublish') || 0;\nlet now = Date.now();\nif (now - lastPublish < 60000) { return null; }\nflow.set('lastPublish', now);\nlet rooms = Object.values(store);\nif (rooms.length === 0) return null;\nlet totalTemp = 0, totalHum = 0;\nrooms.forEach(function(r) {\n    totalTemp += r.sensors.temperature;\n    totalHum  += r.sensors.humidity;\n});\nlet roomCount = rooms.length;\nlet avgTemp = (totalTemp / roomCount).toFixed(2);\nlet avgHum  = (totalHum  / roomCount).toFixed(2);\nlet fStr = 'f' + String(floorId).padStart(2, '0');\nmsg.topic   = `campus/b01/${fStr}/status`;\nmsg.payload = {\n    floor:           String(floorId).padStart(2, '0'),\n    timestamp:       Math.floor(Date.now() / 1000),\n    avg_temperature: parseFloat(avgTemp),\n    avg_humidity:    parseFloat(avgHum),\n    reporting_nodes: roomCount,\n    status:          roomCount >= 18 ? 'Healthy' : 'Degraded'\n};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 920,
+    "y": 400,
+    "wires": [
+      [
+        "8b515c399ad2476a",
+        "1e83d2dccadd4233"
+      ]
+    ]
+  },
+  {
+    "id": "2ebf28a50e8e4c72",
+    "type": "function",
+    "z": "0be5ade2e8204fc0",
+    "name": "function 3",
+    "func": "let parts = msg.topic.split('/');\nlet floor = parseInt(parts[2].replace('f', ''));\nlet roomIDStr = parts[3];\nlet roomNumStr = roomIDStr.replace('r', '');\nlet localRoom  = parseInt(roomNumStr.slice(-2));\nlet room_offset = localRoom - 11;\nlet dynamicPort = 5683 + (floor - 1) * 10 + room_offset;\nmsg.method = \"PUT\";\nmsg.confirmable = true;\nmsg.url = `coap://127.0.0.1:${dynamicPort}/${parts[2]}/${roomIDStr}/actuators/hvac`;\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 920,
+    "y": 180,
+    "wires": [
+      [
+        "31211ad8fac24636"
+      ]
+    ]
+  },
+  {
+    "id": "31211ad8fac24636",
+    "type": "coap request",
+    "z": "0be5ade2e8204fc0",
+    "method": "PUT",
+    "confirmable": true,
+    "observe": false,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "",
+    "x": 1110,
+    "y": 180,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "b105ed256e6f49d1",
+    "type": "mqtt in",
+    "z": "0be5ade2e8204fc0",
+    "name": "",
+    "topic": "campus/b01/f03/+/telemetry",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "f5f54456e3f82fc6",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 560,
+    "y": 240,
+    "wires": [
+      [
+        "71168a4e64ca4a32",
+        "964719ce896b45ee"
+      ]
+    ]
+  },
+  {
+    "id": "8b515c399ad2476a",
+    "type": "mqtt out",
+    "z": "0be5ade2e8204fc0",
+    "name": "",
+    "topic": "",
+    "qos": "2",
+    "retain": "",
+    "broker": "f5f54456e3f82fc6",
+    "x": 1110,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "dbcaf5b53a264f67",
+    "type": "inject",
+    "z": "0be5ade2e8204fc0",
+    "name": "start",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "1",
+    "topic": "",
+    "payload": "",
+    "payloadType": "str",
+    "x": 90,
+    "y": 360,
+    "wires": [
+      [
+        "779e7d147195457a",
+        "3e044fff328c4566",
+        "9d57b1ecb5f14474",
+        "8c36d3f16dd8444b",
+        "afffd7c60c1a4543",
+        "e5a4ddcadb534a39",
+        "61bd969961c840b7",
+        "2fc99c71364946ce",
+        "d847a57e8dc64b22",
+        "1b0f70f5c82d4f32"
+      ]
+    ]
+  },
+  {
+    "id": "85c40cc6ba384916",
+    "type": "debug",
+    "z": "0be5ade2e8204fc0",
+    "name": "debug 4",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 460,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "1e83d2dccadd4233",
+    "type": "debug",
+    "z": "0be5ade2e8204fc0",
+    "name": "debug 5",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1080,
+    "y": 500,
+    "wires": []
+  },
+  {
+    "id": "964719ce896b45ee",
+    "type": "debug",
+    "z": "0be5ade2e8204fc0",
+    "name": "debug 6",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 800,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "b4c19b79e31c4362",
+    "type": "debug",
+    "z": "0be5ade2e8204fc0",
+    "name": "debug 7",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 740,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "f5f54456e3f82fc6",
+    "type": "mqtt-broker",
+    "name": "hivemq",
+    "broker": "hivemq",
+    "port": 1883,
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": 4,
+    "keepalive": 60,
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": "false",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closeRetain": "false",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": "false",
+    "willPayload": "",
+    "willMsg": {},
+    "userProps": "",
+    "sessionExpiry": ""
+  },
+  {
+    "id": "7a97b245a29e488e",
+    "type": "global-config",
+    "env": [],
+    "modules": {
+      "node-red-contrib-coap": "0.8.0"
+    }
+  }
+]

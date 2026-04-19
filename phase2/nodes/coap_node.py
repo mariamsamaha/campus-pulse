@@ -216,7 +216,7 @@ class CoAPNode:
         self.sim_start = sim_start
 
         floor_num = int(room.floor_id[1:])
-        room_num  = int(room.room_id_num[1:])
+        room_num  = int(room.room_id_num[1:]) % 100
 
         self.node_id = room.id
         self.port    = coap_port_for(floor_num, room_num)

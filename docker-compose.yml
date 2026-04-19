@@ -38,19 +38,6 @@ services:
   # --- Node-RED Gateways (10 Instances - 1 per floor) ---
   # These will be configured by Rehab for protocol translation.
   # Each instance gets its own volume and FLOOR env var.
-  nodered-floor-0:
-    image: nodered/node-red:latest
-    container_name: nodered-floor-0
-    environment:
-      - FLOOR=0
-    volumes:
-      - ./infrastructure/nodered/floor-0:/data
-    networks:
-      - campus-network
-    depends_on:
-      - hivemq
-      - thingsboard
-
   nodered-floor-1:
     image: nodered/node-red:latest
     container_name: nodered-floor-1
@@ -73,6 +60,9 @@ services:
       - ./infrastructure/nodered/floor-2:/data
     networks:
       - campus-network
+    depends_on:
+      - hivemq
+      - thingsboard
 
   nodered-floor-3:
     image: nodered/node-red:latest
@@ -141,6 +131,16 @@ services:
       - FLOOR=9
     volumes:
       - ./infrastructure/nodered/floor-9:/data
+    networks:
+      - campus-network
+
+  nodered-floor-10:
+    image: nodered/node-red:latest
+    container_name: nodered-floor-10
+    environment:
+      - FLOOR=10
+    volumes:
+      - ./infrastructure/nodered/floor-10:/data
     networks:
       - campus-network
 
