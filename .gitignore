@@ -4,6 +4,8 @@ __pycache__
 .DS_Store
 .vscode
 .idea
+test
+
 
 # Infrastructure runtime data (Docker volumes) — do NOT commit
 infrastructure/thingsboard/data/

@@ -1,0 +1,834 @@
+[
+  {
+    "id": "e268faf88d9a43ea",
+    "type": "tab",
+    "label": "Floor 05",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "fa000f17003048da",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5723/f05/r511/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r511",
+    "x": 290,
+    "y": 180,
+    "wires": [
+      [
+        "f14c0b735e264af0",
+        "bd15775f3b2b41a3"
+      ]
+    ]
+  },
+  {
+    "id": "8c1586af888a4de0",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5724/f05/r512/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r512",
+    "x": 290,
+    "y": 240,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "08f3af96c99d4ecd",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5725/f05/r513/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r513",
+    "x": 288,
+    "y": 295,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "d5c5e6b6db384041",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5726/f05/r514/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r514",
+    "x": 287,
+    "y": 346,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "3941ed279c2a47b5",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5727/f05/r515/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r515",
+    "x": 290,
+    "y": 400,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "a013f952127f4f1d",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5728/f05/r516/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r516",
+    "x": 290,
+    "y": 460,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "ace56542ff47419e",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5729/f05/r517/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r517",
+    "x": 290,
+    "y": 520,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "b582a804372d44b7",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5730/f05/r518/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r518",
+    "x": 288,
+    "y": 575,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "050606790fd643d9",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5731/f05/r519/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r519",
+    "x": 287,
+    "y": 626,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "33b04bbb0da44fe7",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "GET",
+    "confirmable": true,
+    "observe": true,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "coap://127.0.0.1:5732/f05/r520/telemetry",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "r520",
+    "x": 290,
+    "y": 680,
+    "wires": [
+      [
+        "f14c0b735e264af0"
+      ]
+    ]
+  },
+  {
+    "id": "5711a02db0cf463d",
+    "type": "mqtt in",
+    "z": "e268faf88d9a43ea",
+    "name": "cmd in",
+    "topic": "campus/b01/f05/+/cmd",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "f5f54456e3f82fc6",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 200,
+    "y": 100,
+    "wires": [
+      [
+        "4f0272f7843940d1"
+      ]
+    ]
+  },
+  {
+    "id": "916048dc45e24112",
+    "type": "mqtt in",
+    "z": "e268faf88d9a43ea",
+    "name": "telemetry in",
+    "topic": "campus/b01/f05/+/telemetry",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "f5f54456e3f82fc6",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 200,
+    "y": 180,
+    "wires": [
+      [
+        "f14c0b735e264af0",
+        "b91b04277b2c4f1f"
+      ]
+    ]
+  },
+  {
+    "id": "f5cad2a6f8744a33",
+    "type": "mqtt in",
+    "z": "e268faf88d9a43ea",
+    "name": "status/LWT in",
+    "topic": "campus/b01/f05/+/status",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "f5f54456e3f82fc6",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 200,
+    "y": 700,
+    "wires": [
+      [
+        "0db12462beb84597"
+      ]
+    ]
+  },
+  {
+    "id": "ef948cc847b643a6",
+    "type": "mqtt in",
+    "z": "e268faf88d9a43ea",
+    "name": "ack in",
+    "topic": "campus/b01/f05/+/ack",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "f5f54456e3f82fc6",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 200,
+    "y": 780,
+    "wires": [
+      [
+        "a9a6343361c44040"
+      ]
+    ]
+  },
+  {
+    "id": "3cffe6010fe94cdf",
+    "type": "mqtt in",
+    "z": "e268faf88d9a43ea",
+    "name": "attributes in",
+    "topic": "campus/b01/f05/+/attributes",
+    "qos": "1",
+    "datatype": "auto-detect",
+    "broker": "f5f54456e3f82fc6",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 200,
+    "y": 860,
+    "wires": [
+      [
+        "25af84fbdf1e4f1e"
+      ]
+    ]
+  },
+  {
+    "id": "f14c0b735e264af0",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "function 1",
+    "func": "let floorNum = env.get(\"FLOOR\");\nlet fStr = \"f\" + String(floorNum).padStart(2, \"0\");\nlet payload = msg.payload;\nif (typeof payload === \"string\") {\n    try { payload = JSON.parse(payload); }\n    catch(e) { node.warn(\"Could not parse payload: \" + payload); return null; }\n}\nlet sensorId = payload.metadata && payload.metadata.sensor_id;\nif (!sensorId) {\n    node.warn(\"Missing metadata.sensor_id\");\n    return null;\n}\nlet roomID = sensorId.split(\"-\")[2];\nmsg.topic   = `campus/b01/${fStr}/${roomID}/telemetry`;\nmsg.payload = payload;\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 500,
+    "y": 340,
+    "wires": [
+      [
+        "61250e56091c4db3"
+      ]
+    ]
+  },
+  {
+    "id": "61250e56091c4db3",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "desired/reported sync",
+    "func": "// \u2500\u2500 Desired vs Reported Sync \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try { payload = JSON.parse(payload); } catch(e) { return msg; }\n}\nlet sensorId = payload.metadata && payload.metadata.sensor_id;\nif (!sensorId) { return msg; }\n\n// Load desired state store {sensorId: {hvac_mode, lighting_dimmer, ts}}\nlet desired = flow.get('desiredState') || {};\nlet reported = flow.get('reportedState') || {};\n\n// Update reported state with latest telemetry\nreported[sensorId] = {\n    hvac_mode:       payload.actuators && payload.actuators.hvac_mode,\n    lighting_dimmer: payload.actuators && payload.actuators.lighting_dimmer,\n    last_seen:       Math.floor(Date.now() / 1000)\n};\nflow.set('reportedState', reported);\n\n// Check if there is a pending desired state for this room\nlet roomDesired = desired[sensorId];\nif (!roomDesired) { return msg; }  // no pending desired \u2014 pass through\n\nlet roomReported = reported[sensorId];\nlet outOfSync = false;\n\n// Compare desired vs reported\nif (roomDesired.hvac_mode && roomDesired.hvac_mode !== roomReported.hvac_mode) {\n    outOfSync = true;\n}\nif (roomDesired.lighting_dimmer !== undefined &&\n    roomDesired.lighting_dimmer !== roomReported.lighting_dimmer) {\n    outOfSync = true;\n}\n\nif (outOfSync) {\n    node.warn('SYNC: ' + sensorId + ' out of sync \u2014 pushing desired state');\n\n    // Build sync commands to push desired state to the node\n    let syncMsgs = [];\n    let floorId  = env.get('FLOOR');\n    let fStr     = 'f' + String(floorId).padStart(2, '0');\n    let roomID   = sensorId.split('-')[2];\n    let cmdTopic = `campus/b01/${fStr}/${roomID}/cmd`;\n\n    if (roomDesired.hvac_mode && roomDesired.hvac_mode !== roomReported.hvac_mode) {\n        syncMsgs.push({\n            topic:   cmdTopic,\n            payload: JSON.stringify({\n                command_id:    'sync-' + Date.now(),\n                target_device: sensorId,\n                action:        'SET_HVAC',\n                value:         roomDesired.hvac_mode,\n                timestamp:     Math.floor(Date.now() / 1000),\n                source:        'desired_sync'\n            })\n        });\n    }\n    if (roomDesired.lighting_dimmer !== undefined &&\n        roomDesired.lighting_dimmer !== roomReported.lighting_dimmer) {\n        syncMsgs.push({\n            topic:   cmdTopic,\n            payload: JSON.stringify({\n                command_id:    'sync-dimmer-' + Date.now(),\n                target_device: sensorId,\n                action:        'SET_DIMMER',\n                value:         roomDesired.lighting_dimmer,\n                timestamp:     Math.floor(Date.now() / 1000),\n                source:        'desired_sync'\n            })\n        });\n    }\n\n    // Send each sync command\n    syncMsgs.forEach(function(m) { node.send([msg, m]); });\n    return null;  // hold original message \u2014 sync command takes priority\n}\n\nreturn msg;  // in sync \u2014 pass through to avg calculator",
+    "outputs": 2,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 340,
+    "wires": [
+      [
+        "940f8f165f744da5"
+      ],
+      [
+        "0c55817bdd4c4b4a"
+      ]
+    ]
+  },
+  {
+    "id": "940f8f165f744da5",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "edge autonomy",
+    "func": "let payload = msg.payload;\nif (typeof payload === 'string') {\n    try { payload = JSON.parse(payload); } catch(e) { return msg; }\n}\nlet occupancy = payload.sensors && payload.sensors.occupancy;\nlet sensorId  = payload.metadata && payload.metadata.sensor_id;\nlet floorId   = env.get('FLOOR');\nlet fStr      = 'f' + String(floorId).padStart(2, '0');\nif (!sensorId) { return msg; }\nlet roomID = sensorId.split('-')[2];\nif (!occupancy) {\n    node.send([msg, {\n        topic:   `campus/b01/${fStr}/${roomID}/cmd`,\n        payload: JSON.stringify({\n            command_id:    'auto-' + Date.now(),\n            target_device: sensorId,\n            action:        'SET_HVAC',\n            value:         'OFF',\n            source:        'edge_autonomy'\n        })\n    }]);\n    return null;\n}\nreturn msg;",
+    "outputs": 2,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 900,
+    "y": 340,
+    "wires": [
+      [
+        "7a73006595614f46"
+      ],
+      [
+        "41b9e4587e7c44ca"
+      ]
+    ]
+  },
+  {
+    "id": "7a73006595614f46",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "avg calculator",
+    "func": "let store   = flow.get('floorReadings') || {};\nlet floorId = env.get('FLOOR') || 5;\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try { payload = JSON.parse(payload); }\n    catch(e) { return null; }\n}\nlet sensorId = payload.metadata && payload.metadata.sensor_id;\nif (!sensorId) { return null; }\nstore[sensorId] = payload;\nflow.set('floorReadings', store);\nlet roomCount = Object.keys(store).length;\nif (roomCount < 18) {\n    node.warn('Waiting: ' + roomCount + '/20');\n    return null;\n}\nlet lastPublish = flow.get('lastPublish') || 0;\nlet now = Date.now();\nif (now - lastPublish < 60000) { return null; }\nflow.set('lastPublish', now);\nlet rooms = Object.values(store);\nlet totalTemp = 0, totalHum = 0;\nrooms.forEach(function(r) {\n    totalTemp += r.sensors.temperature;\n    totalHum  += r.sensors.humidity;\n});\nlet avgTemp = (totalTemp / roomCount).toFixed(2);\nlet avgHum  = (totalHum  / roomCount).toFixed(2);\nlet fStr = 'f' + String(floorId).padStart(2, '0');\nmsg.topic   = `campus/b01/${fStr}/status`;\nmsg.payload = {\n    floor:           String(floorId).padStart(2, '0'),\n    timestamp:       Math.floor(Date.now() / 1000),\n    avg_temperature: parseFloat(avgTemp),\n    avg_humidity:    parseFloat(avgHum),\n    reporting_nodes: roomCount,\n    status:          roomCount >= 18 ? 'Healthy' : 'Degraded'\n};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1100,
+    "y": 340,
+    "wires": [
+      [
+        "51cfdc65a8104741",
+        "44709ef7071a439e"
+      ]
+    ]
+  },
+  {
+    "id": "4f0272f7843940d1",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "cmd router",
+    "func": "// \u2500\u2500 Phase 3 Command Router \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n// Handles both new Phase 3 format and legacy Phase 2 format\nlet rawPayload = msg.payload;\nif (typeof rawPayload === 'string') {\n    try { rawPayload = JSON.parse(rawPayload); }\n    catch(e) { node.warn('CMD: invalid JSON'); return null; }\n}\n\n// Support Phase 3 format: {command_id, target_device, action, value}\n// Support Phase 2 format: {action, value}\nlet action = rawPayload.action || rawPayload.method || null;\nlet value  = rawPayload.value  || rawPayload.params || null;\nif (!action) { node.warn('CMD: missing action field'); return null; }\n\n// Generate command_id if not present (Phase 2 compatibility)\nlet cmdId = rawPayload.command_id || ('cmd-' + Date.now());\n\n// Normalise to Phase 3 format\nmsg.payload = {\n    command_id:    cmdId,\n    target_device: rawPayload.target_device || msg.topic.split('/').slice(0,4).join('-'),\n    action:        action.toUpperCase(),\n    value:         value,\n    timestamp:     Math.floor(Date.now() / 1000),\n    source:        rawPayload.source || 'dashboard'\n};\n\n// Track pending commands for ACK matching\nlet pending = flow.get('pendingCmds') || {};\npending[cmdId] = {\n    topic:   msg.topic,\n    action:  action.toUpperCase(),\n    value:   value,\n    sent_at: Date.now()\n};\nflow.set('pendingCmds', pending);\n\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 450,
+    "y": 100,
+    "wires": [
+      [
+        "3fd66d7f926c4b2c"
+      ]
+    ]
+  },
+  {
+    "id": "3fd66d7f926c4b2c",
+    "type": "switch",
+    "z": "e268faf88d9a43ea",
+    "name": "MQTT/CoAP router",
+    "property": "topic",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "regex",
+        "v": "r5(0[1-9]|10)",
+        "vt": "str",
+        "case": false
+      },
+      {
+        "t": "regex",
+        "v": "r5(1[1-9]|20)",
+        "vt": "str",
+        "case": false
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 2,
+    "x": 650,
+    "y": 100,
+    "wires": [
+      [
+        "6f33f5db764b47c4"
+      ],
+      [
+        "882c71e5d6eb4146"
+      ]
+    ]
+  },
+  {
+    "id": "882c71e5d6eb4146",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "function 3",
+    "func": "let parts = msg.topic.split('/');\nlet floor = parseInt(parts[2].replace('f', ''));\nlet roomIDStr = parts[3];\nlet roomNumStr = roomIDStr.replace('r', '');\nlet localRoom  = parseInt(roomNumStr.slice(-2));\nlet room_offset = localRoom - 11;\nlet dynamicPort = 5683 + (floor - 1) * 10 + room_offset;\nmsg.method = \"PUT\";\nmsg.confirmable = true;\nmsg.url = `coap://127.0.0.1:${dynamicPort}/${parts[2]}/${roomIDStr}/actuators/hvac`;\nmsg._roomIDStr = roomIDStr;\nmsg._parts = parts;\n// CoAP request node requires string/buffer payload\nif (typeof msg.payload === 'object') {\n    msg.payload = JSON.stringify(msg.payload);\n}\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 850,
+    "y": 160,
+    "wires": [
+      [
+        "c194d9cf72154a77"
+      ]
+    ]
+  },
+  {
+    "id": "c194d9cf72154a77",
+    "type": "coap request",
+    "z": "e268faf88d9a43ea",
+    "method": "PUT",
+    "confirmable": true,
+    "observe": false,
+    "multicast": false,
+    "multicastTimeout": 20000,
+    "url": "",
+    "content-format": "text/plain",
+    "raw-buffer": false,
+    "name": "CoAP PUT",
+    "x": 1050,
+    "y": 160,
+    "wires": [
+      [
+        "dc4a8e7cab744ff8"
+      ]
+    ]
+  },
+  {
+    "id": "dc4a8e7cab744ff8",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "CoAP response",
+    "func": "// Publish CoAP ACK confirmation back to HiveMQ\nlet parts     = msg._parts || [];\nlet roomIDStr = msg._roomIDStr || 'unknown';\nlet floorId   = env.get('FLOOR');\nlet fStr      = 'f' + String(floorId).padStart(2, '0');\nlet response  = {};\nif (msg.payload) {\n    try {\n        response = typeof msg.payload === 'string' ?\n            JSON.parse(msg.payload) : msg.payload;\n    } catch(e) {}\n}\nmsg.topic   = `campus/b01/${fStr}/${roomIDStr}/response`;\nmsg.payload = {\n    confirmed:  true,\n    ack:        response.ack   || false,\n    new_state:  response.new_state || null,\n    command:    response.command   || null,\n    timestamp:  Math.floor(Date.now() / 1000)\n};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1050,
+    "y": 240,
+    "wires": [
+      [
+        "98397590da524ccf",
+        "0bfaa37b26824253"
+      ]
+    ]
+  },
+  {
+    "id": "25af84fbdf1e4f1e",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "desired state setter",
+    "func": "// \u2500\u2500 Desired State Setter \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n// Receives desired state pushed from ThingsBoard Shared Attributes\n// Topic: campus/b01/f##/<roomID>/attributes\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try { payload = JSON.parse(payload); } catch(e) { return null; }\n}\n\n// Extract room from topic\nlet parts    = msg.topic.split('/');\nlet roomID   = parts[3];  // e.g. r101\nlet floorId  = env.get('FLOOR');\nlet fStr     = 'f' + String(floorId).padStart(2, '0');\nlet sensorId = `b01-${fStr}-${roomID}`;\n\n// Store desired state\nlet desired = flow.get('desiredState') || {};\ndesired[sensorId] = {\n    hvac_mode:       payload.hvac_mode       || payload.desired_hvac    || null,\n    lighting_dimmer: payload.lighting_dimmer || payload.desired_dimmer  || null,\n    set_at:          Math.floor(Date.now() / 1000)\n};\nflow.set('desiredState', desired);\nnode.warn('DESIRED SET: ' + sensorId + ' \u2192 ' + JSON.stringify(desired[sensorId]));\n\n// Check reported state immediately \u2014 node might already be in sync\nlet reported = flow.get('reportedState') || {};\nlet rep = reported[sensorId];\nif (rep) {\n    let alreadyInSync = true;\n    if (desired[sensorId].hvac_mode && desired[sensorId].hvac_mode !== rep.hvac_mode) {\n        alreadyInSync = false;\n    }\n    if (desired[sensorId].lighting_dimmer !== null &&\n        desired[sensorId].lighting_dimmer !== rep.lighting_dimmer) {\n        alreadyInSync = false;\n    }\n    if (alreadyInSync) {\n        delete desired[sensorId];\n        flow.set('desiredState', desired);\n        node.warn('SYNC: ' + sensorId + ' already in sync \u2014 no action needed');\n        return null;\n    }\n}\n\n// Node not in sync \u2014 build immediate command\nlet d = desired[sensorId];\nif (d.hvac_mode) {\n    node.send([{\n        topic:   `campus/b01/${fStr}/${roomID}/cmd`,\n        payload: JSON.stringify({\n            command_id:    'desired-' + Date.now(),\n            target_device: sensorId,\n            action:        'SET_HVAC',\n            value:         d.hvac_mode,\n            timestamp:     Math.floor(Date.now() / 1000),\n            source:        'desired_state'\n        })\n    }, null]);\n}\nif (d.lighting_dimmer !== null) {\n    node.send([null, {\n        topic:   `campus/b01/${fStr}/${roomID}/cmd`,\n        payload: JSON.stringify({\n            command_id:    'desired-dimmer-' + Date.now(),\n            target_device: sensorId,\n            action:        'SET_DIMMER',\n            value:         d.lighting_dimmer,\n            timestamp:     Math.floor(Date.now() / 1000),\n            source:        'desired_state'\n        })\n    }]);\n}\nreturn null;",
+    "outputs": 2,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 450,
+    "y": 860,
+    "wires": [
+      [
+        "6f33f5db764b47c4"
+      ],
+      [
+        "6f33f5db764b47c4"
+      ]
+    ]
+  },
+  {
+    "id": "a9a6343361c44040",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "ack handler",
+    "func": "// \u2500\u2500 ACK Handler: close round-trip loop \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try { payload = JSON.parse(payload); } catch(e) { return null; }\n}\nif (payload.ack !== true) { return null; }\n\nlet sensorId  = payload.sensor_id;\nlet command   = payload.command;\nlet new_state = payload.new_state;\n\nnode.warn('ACK: ' + sensorId + ' cmd=' + command + ' new_state=' + new_state);\n\n// \u2500\u2500 1. Clear from pending commands \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nlet pending = flow.get('pendingCmds') || {};\nObject.keys(pending).forEach(function(cmdId) {\n    let p = pending[cmdId];\n    if (p.action === command) { delete pending[cmdId]; }\n});\nflow.set('pendingCmds', pending);\n\n// \u2500\u2500 2. Update reported state \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nlet reported = flow.get('reportedState') || {};\nif (!reported[sensorId]) { reported[sensorId] = {}; }\nif (command === 'SET_HVAC')   { reported[sensorId].hvac_mode       = new_state; }\nif (command === 'SET_DIMMER') { reported[sensorId].lighting_dimmer = new_state; }\nreported[sensorId].last_seen = Math.floor(Date.now() / 1000);\nflow.set('reportedState', reported);\n\n// \u2500\u2500 3. Check if desired is now satisfied \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nlet desired = flow.get('desiredState') || {};\nlet roomDesired = desired[sensorId];\nif (roomDesired) {\n    let satisfied = true;\n    let rep = reported[sensorId];\n    if (roomDesired.hvac_mode && roomDesired.hvac_mode !== rep.hvac_mode) {\n        satisfied = false;\n    }\n    if (roomDesired.lighting_dimmer !== undefined &&\n        roomDesired.lighting_dimmer !== rep.lighting_dimmer) {\n        satisfied = false;\n    }\n    if (satisfied) {\n        delete desired[sensorId];\n        flow.set('desiredState', desired);\n        node.warn('SYNC COMPLETE: ' + sensorId + ' desired == reported');\n    }\n}\n\n// \u2500\u2500 4. Store last ack per room for dashboard \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nlet acks = flow.get('lastAcks') || {};\nacks[sensorId] = {\n    command:   command,\n    new_state: new_state,\n    ts:        payload.ts_ms || Date.now()\n};\nflow.set('lastAcks', acks);\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 450,
+    "y": 780,
+    "wires": [
+      [
+        "c978d07c83074992"
+      ]
+    ]
+  },
+  {
+    "id": "0db12462beb84597",
+    "type": "function",
+    "z": "e268faf88d9a43ea",
+    "name": "status handler",
+    "func": "let payload = msg.payload;\nif (typeof payload === 'string') {\n    try { payload = JSON.parse(payload); } catch(e) { return null; }\n}\nif (payload.status === 'offline') {\n    node.warn('NODE OFFLINE: ' + (payload.sensor_id || msg.topic));\n    let offlineNodes = flow.get('offlineNodes') || {};\n    offlineNodes[payload.sensor_id] = { since: Math.floor(Date.now() / 1000) };\n    flow.set('offlineNodes', offlineNodes);\n} else if (payload.status === 'online') {\n    let offlineNodes = flow.get('offlineNodes') || {};\n    delete offlineNodes[payload.sensor_id];\n    flow.set('offlineNodes', offlineNodes);\n    node.warn('NODE ONLINE: ' + payload.sensor_id);\n}\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 450,
+    "y": 700,
+    "wires": [
+      [
+        "c978d07c83074992"
+      ]
+    ]
+  },
+  {
+    "id": "6f33f5db764b47c4",
+    "type": "mqtt out",
+    "z": "e268faf88d9a43ea",
+    "name": "cmd forward",
+    "topic": "",
+    "qos": "2",
+    "retain": "",
+    "broker": "f5f54456e3f82fc6",
+    "x": 870,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "51cfdc65a8104741",
+    "type": "mqtt out",
+    "z": "e268faf88d9a43ea",
+    "name": "floor status",
+    "topic": "",
+    "qos": "2",
+    "retain": "",
+    "broker": "f5f54456e3f82fc6",
+    "x": 1300,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "98397590da524ccf",
+    "type": "mqtt out",
+    "z": "e268faf88d9a43ea",
+    "name": "cmd response",
+    "topic": "",
+    "qos": "1",
+    "retain": "",
+    "broker": "f5f54456e3f82fc6",
+    "x": 1300,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "41b9e4587e7c44ca",
+    "type": "mqtt out",
+    "z": "e268faf88d9a43ea",
+    "name": "local cmd",
+    "topic": "",
+    "qos": "1",
+    "retain": "",
+    "broker": "f5f54456e3f82fc6",
+    "x": 1100,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "0c55817bdd4c4b4a",
+    "type": "mqtt out",
+    "z": "e268faf88d9a43ea",
+    "name": "sync cmd",
+    "topic": "",
+    "qos": "2",
+    "retain": "",
+    "broker": "f5f54456e3f82fc6",
+    "x": 900,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "71f789bc14ad4874",
+    "type": "inject",
+    "z": "e268faf88d9a43ea",
+    "name": "start",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "1",
+    "topic": "",
+    "payload": "",
+    "payloadType": "str",
+    "x": 90,
+    "y": 400,
+    "wires": [
+      [
+        "fa000f17003048da",
+        "8c1586af888a4de0",
+        "08f3af96c99d4ecd",
+        "d5c5e6b6db384041",
+        "3941ed279c2a47b5",
+        "a013f952127f4f1d",
+        "ace56542ff47419e",
+        "b582a804372d44b7",
+        "050606790fd643d9",
+        "33b04bbb0da44fe7"
+      ]
+    ]
+  },
+  {
+    "id": "bd15775f3b2b41a3",
+    "type": "debug",
+    "z": "e268faf88d9a43ea",
+    "name": "CoAP raw",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 460,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "b91b04277b2c4f1f",
+    "type": "debug",
+    "z": "e268faf88d9a43ea",
+    "name": "MQTT tel",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 450,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "44709ef7071a439e",
+    "type": "debug",
+    "z": "e268faf88d9a43ea",
+    "name": "avg out",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1300,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "0bfaa37b26824253",
+    "type": "debug",
+    "z": "e268faf88d9a43ea",
+    "name": "CoAP resp",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1300,
+    "y": 300,
+    "wires": []
+  },
+  {
+    "id": "c978d07c83074992",
+    "type": "debug",
+    "z": "e268faf88d9a43ea",
+    "name": "status/ack",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 650,
+    "y": 740,
+    "wires": []
+  },
+  {
+    "id": "cab34eabda0e4518",
+    "type": "debug",
+    "z": "e268faf88d9a43ea",
+    "name": "sync cmds",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1100,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "f5f54456e3f82fc6",
+    "type": "mqtt-broker",
+    "name": "hivemq",
+    "broker": "hivemq",
+    "port": 1883,
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": 4,
+    "keepalive": 60,
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": "false",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closeRetain": "false",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": "false",
+    "willPayload": "",
+    "willMsg": {},
+    "userProps": "",
+    "sessionExpiry": ""
+  },
+  {
+    "id": "7a97b245a29e488e",
+    "type": "global-config",
+    "env": [],
+    "modules": {
+      "node-red-contrib-coap": "0.8.0"
+    }
+  }
+]
