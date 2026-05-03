@@ -35,6 +35,23 @@ class RoomState:        # complete snapshot for persistence
     occupancy:    bool = False
     light_level:  int  = 50
 
+
+@dataclass
+class DesiredState:
+    hvac_mode:       Optional[str]   = None   
+    target_temp:     Optional[float] = None  
+    lighting_dimmer: Optional[int]   = None   
+    occupancy:       Optional[bool]  = None   
+ 
+@dataclass
+class OTAConfig:
+
+    alpha:          Optional[float] = None   
+    beta:           Optional[float] = None   
+    tick_interval:  Optional[float] = None   
+    fault_prob:     Optional[float] = None   
+ 
+ 
 class Room:         # represents a single iot node
     def __init__(
         self,
@@ -74,6 +91,10 @@ class Room:         # represents a single iot node
         self.fault_active    = False
         self.fault_type: Optional[str] = None
         self._frozen_temp: Optional[float] = None
+
+        self.desired = DesiredState()
+        self._pending_sync = False
+        self._ota_version: Optional[str] = None
 
         logger.debug("[%s] Room initialised at path %s", self.id, self.mqtt_path)
 
