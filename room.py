@@ -76,6 +76,8 @@ class Room:         # represents a single iot node
             self.humidity        = state.last_humidity
             self.hvac_mode       = state.hvac_mode
             self.target_temp     = state.target_temp
+            self.occupancy   = state.occupancy 
+            self.light_level = state.light_level 
             logger.info("[%s] State restored from DB (temp=%.1f, hvac=%s)",
                         self.id, self.temp, self.hvac_mode)
         else:
@@ -172,7 +174,121 @@ class Room:         # represents a single iot node
         if self.hvac_mode not in VALID_HVAC_MODES:
             logger.error("[%s] Invalid hvac_mode '%s', resetting to OFF", self.id, self.hvac_mode)
             self.hvac_mode = "OFF"
+    
 
+    def receive_desired_state(self, desired_payload: dict) -> None:
+        if "hvac_mode" in desired_payload:
+            mode = desired_payload["hvac_mode"]
+            if mode in VALID_HVAC_MODES:
+                self.desired.hvac_mode = mode
+            else:
+                logger.warning("[%s] Desired HVAC mode '%s' invalid — ignoring", self.id, mode)
+ 
+        if "target_temp" in desired_payload:
+            self.desired.target_temp = float(desired_payload["target_temp"])
+ 
+        if "lighting_dimmer" in desired_payload:
+            lo, hi = SPEC["lighting_dimmer"]
+            val = int(desired_payload["lighting_dimmer"])
+            self.desired.lighting_dimmer = max(lo, min(hi, val))
+ 
+        if "occupancy" in desired_payload:
+            self.desired.occupancy = bool(desired_payload["occupancy"])
+ 
+        self._pending_sync = True
+        logger.info("[%s] Desired state received: %s", self.id, desired_payload)
+ 
+    def apply_desired_state(self) -> bool:
+
+        if not self._pending_sync:
+            return False
+ 
+        changed = False
+ 
+        if self.desired.hvac_mode is not None:
+            if self.hvac_mode != self.desired.hvac_mode:
+                logger.info("[%s] Shadow sync: HVAC %s → %s",
+                            self.id, self.hvac_mode, self.desired.hvac_mode)
+                self.hvac_mode = self.desired.hvac_mode
+                changed = True
+ 
+        if self.desired.target_temp is not None:
+            if self.target_temp != self.desired.target_temp:
+                logger.info("[%s] Shadow sync: target_temp %.1f → %.1f",
+                            self.id, self.target_temp, self.desired.target_temp)
+                self.target_temp = self.desired.target_temp
+                changed = True
+ 
+        if self.desired.lighting_dimmer is not None:
+            if self.lighting_dimmer != self.desired.lighting_dimmer:
+                self.lighting_dimmer = self.desired.lighting_dimmer
+                self.light_level     = self.lighting_dimmer * 10   # keep in sync
+                changed = True
+ 
+        if self.desired.occupancy is not None:
+            if self.occupancy != self.desired.occupancy:
+                logger.info("[%s] Shadow sync: occupancy %s → %s",
+                            self.id, self.occupancy, self.desired.occupancy)
+                self.occupancy = self.desired.occupancy
+                changed = True
+ 
+        # Clear pending flag once reconciled
+        self._pending_sync = False
+        return changed
+ 
+    @property
+    def is_in_sync(self) -> bool:
+        if self.desired.hvac_mode is not None and self.hvac_mode != self.desired.hvac_mode:
+            return False
+        if self.desired.target_temp is not None and self.target_temp != self.desired.target_temp:
+            return False
+        if self.desired.lighting_dimmer is not None and self.lighting_dimmer != self.desired.lighting_dimmer:
+            return False
+        if self.desired.occupancy is not None and self.occupancy != self.desired.occupancy:
+            return False
+        return True
+ 
+
+    def apply_ota_config(self, config_payload: dict) -> list[str]:
+        changes = []
+ 
+        version = config_payload.get("version")
+        if version:
+            self._ota_version = str(version)
+ 
+        if "alpha" in config_payload:
+            new_alpha = float(config_payload["alpha"])
+            if 0 < new_alpha < 1:           # sanity check
+                if new_alpha != self.alpha:
+                    logger.info("[%s] OTA: alpha %.4f → %.4f", self.id, self.alpha, new_alpha)
+                    self.alpha = new_alpha
+                    changes.append(f"alpha={new_alpha}")
+            else:
+                logger.warning("[%s] OTA: alpha %.4f out of range (0-1) — ignored", self.id, new_alpha)
+ 
+        if "beta" in config_payload:
+            new_beta = float(config_payload["beta"])
+            if 0 < new_beta <= 2.0:         # sanity check
+                if new_beta != self.beta:
+                    logger.info("[%s] OTA: beta %.4f → %.4f", self.id, self.beta, new_beta)
+                    self.beta = new_beta
+                    changes.append(f"beta={new_beta}")
+            else:
+                logger.warning("[%s] OTA: beta %.4f out of range (0-2) — ignored", self.id, new_beta)
+ 
+        if "tick_interval" in config_payload:
+            changes.append(f"tick_interval={config_payload['tick_interval']}")
+ 
+        if "fault_prob" in config_payload:
+            changes.append(f"fault_prob={config_payload['fault_prob']}")
+ 
+        if changes:
+            logger.info("[%s] OTA config applied (version=%s): %s",
+                        self.id, self._ota_version, ", ".join(changes))
+        else:
+            logger.debug("[%s] OTA config received but no changes applied.", self.id)
+ 
+        return changes
     def telemetry_payload(self) -> dict:
         return {
             "metadata": {
@@ -193,15 +309,50 @@ class Room:         # represents a single iot node
                 "lighting_dimmer": self.lighting_dimmer,
             },
         }
-
+    
+    def shadow_payload(self) -> dict:
+        return {
+            "desired": {
+                "hvac_mode":       self.desired.hvac_mode,
+                "target_temp":     self.desired.target_temp,
+                "lighting_dimmer": self.desired.lighting_dimmer,
+                "occupancy":       self.desired.occupancy,
+            },
+            "reported": {
+                "hvac_mode":       self.hvac_mode,
+                "target_temp":     self.target_temp,
+                "temperature":     round(self.temp, 2),
+                "humidity":        round(self.humidity, 2),
+                "occupancy":       self.occupancy,
+                "light_level":     self.light_level,
+                "lighting_dimmer": self.lighting_dimmer,
+            },
+            "in_sync":   self.is_in_sync,
+            "sensor_id": self.id,
+            "timestamp": int(time.time()),
+        }
+ 
+    def ota_ack_payload(self, changes: list[str]) -> dict:
+        return {
+            "sensor_id":   self.id,
+            "ota_version": self._ota_version,
+            "status":      "applied" if changes else "no_change",
+            "changes":     changes,
+            "alpha":       self.alpha,
+            "beta":        self.beta,
+            "timestamp":   int(time.time()),
+        }
+    
     def heartbeat_payload(self) -> dict:
         return {
             "sensor_id": self.id,
             "status":    "healthy",
+            "in_sync": self.is_in_sync,
+            "ota_ver": self._ota_version,
             "timestamp": int(time.time()),
         }
 
-    def to_state(self) -> RoomState:  # snapshot of current state for saving to db
+    def to_state(self) -> RoomState:  
         return RoomState(
             room_id       = self.id,
             last_temp     = round(self.temp, 4),
@@ -214,9 +365,11 @@ class Room:         # represents a single iot node
         )
 
     def __repr__(self) -> str:
+        sync = "✓" if self.is_in_sync else "⟳"
         return (
             f"<Room {self.id} | T={self.temp:.1f}°C "
             f"H={self.humidity:.1f}% "
             f"Occ={self.occupancy} "
-            f"HVAC={self.hvac_mode}>"
+            f"HVAC={self.hvac_mode}"
+            f"sync={sync}>"  
         )
