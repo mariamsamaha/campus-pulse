@@ -23,7 +23,7 @@ from latency_tracker import LatencyTracker
 
 logger = logging.getLogger("stress_test")
 
-TEST_DURATION_S = 30 * 60   
+TEST_DURATION_S = 30   
 REPORT_PATH     = _HERE / "stress_test_results.json"
 
 
