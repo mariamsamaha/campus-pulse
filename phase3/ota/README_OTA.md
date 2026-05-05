@@ -1,7 +1,4 @@
 # Phase 3 — OTA Security & Integrity System
-
-**Campus Pulse · IoT Infrastructure · Mai's Deliverable**
-
 ---
 
 ## Overview
@@ -51,7 +48,7 @@ This module implements the **Secure Over-The-Air (OTA) update pipeline** for the
 | `ota/receiver.py` | End-to-end OTA pipeline (verify → version-check → apply) |
 | `ota/publisher.py` | Signed payload creation and dispatch (broadcast/floor/room) |
 | `ota/types.py` | Shared dataclasses: `OtaUpdateResult`, `TamperAlert`, `OtaPayload` |
-| `test_ota.py` | 50 unit tests — all green ✅ |
+| `test_ota.py` | 50 unit tests — all passed |
 
 ---
 
