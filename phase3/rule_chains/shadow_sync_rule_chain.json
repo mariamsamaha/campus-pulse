@@ -1,0 +1,200 @@
+{
+  "ruleChain": {
+    "name": "Shadow State Sync & Conflict Detection",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null,
+    "additionalInfo": {
+      "description": "Detects desired vs reported state conflicts. Triggered when CLIENT attributes are updated by a device. Compares desired_hvac/desired_dimmer (SHARED) against reported_hvac/reported_dimmer (CLIENT) and sets sync_status accordingly."
+    }
+  },
+  "metadata": {
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeFilterNode",
+        "name": "Filter: CLIENT_ATTRIBUTES_UPDATED",
+        "debugMode": false,
+        "configuration": {
+          "messageTypes": ["POST_ATTRIBUTES_REQUEST"]
+        },
+        "additionalInfo": {
+          "description": "Triggers when a device posts CLIENT attributes (reported state)",
+          "layoutX": 100,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Fetch SHARED (Desired) attributes",
+        "debugMode": false,
+        "configuration": {
+          "scope": "SHARED_SCOPE",
+          "attrMapping": {
+            "desired_hvac":   "desired_hvac",
+            "desired_dimmer": "desired_dimmer"
+          },
+          "fetchTo": "METADATA",
+          "tellFailureIfAbsent": false
+        },
+        "additionalInfo": {
+          "description": "Load desired_hvac and desired_dimmer from SHARED_SCOPE into metadata",
+          "layoutX": 350,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Fetch CLIENT (Reported) attributes",
+        "debugMode": false,
+        "configuration": {
+          "scope": "CLIENT_SCOPE",
+          "attrMapping": {
+            "reported_hvac":   "reported_hvac",
+            "reported_dimmer": "reported_dimmer"
+          },
+          "fetchTo": "METADATA",
+          "tellFailureIfAbsent": false
+        },
+        "additionalInfo": {
+          "description": "Load reported_hvac and reported_dimmer from CLIENT_SCOPE into metadata",
+          "layoutX": 600,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Detect sync conflict",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "/**\n * Shadow State Conflict Detection Script\n *\n * Reads desired state (SHARED) and reported state (CLIENT) from metadata.\n * Computes sync_status and emits a CLIENT attribute update.\n *\n * sync_status values:\n *   'SYNCED'      — desired == reported for all actuators\n *   'OUT_OF_SYNC' — at least one actuator differs\n *   'PENDING'     — device last_seen is 0 (never connected)\n */\n\nvar desiredHvac   = metadata.desired_hvac   || 'OFF';\nvar desiredDimmer = parseInt(metadata.desired_dimmer || '50', 10);\nvar reportedHvac  = metadata.reported_hvac  || 'OFF';\nvar reportedDimmer= parseInt(metadata.reported_dimmer|| '50', 10);\nvar lastSeen      = parseInt(metadata.last_seen || '0', 10);\n\nvar syncStatus = 'SYNCED';\n\nif (lastSeen === 0) {\n    syncStatus = 'PENDING';  // Device never reported\n} else if (desiredHvac !== reportedHvac || desiredDimmer !== reportedDimmer) {\n    syncStatus = 'OUT_OF_SYNC';\n}\n\n// Emit sync_status as a CLIENT attribute update on this device\nmsg = {\n    sync_status:      syncStatus,\n    desired_hvac:     desiredHvac,\n    desired_dimmer:   desiredDimmer,\n    reported_hvac:    reportedHvac,\n    reported_dimmer:  reportedDimmer,\n    last_seen:        new Date().getTime()\n};\n\nmsgType = 'POST_ATTRIBUTES_REQUEST';\n\nreturn {msg: msg, metadata: metadata, msgType: msgType};\n"
+        },
+        "additionalInfo": {
+          "description": "Compare desired vs reported and compute sync_status: SYNCED | OUT_OF_SYNC | PENDING",
+          "layoutX": 850,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbSaveAttributesNode",
+        "name": "Save sync_status to CLIENT_SCOPE",
+        "debugMode": false,
+        "configuration": {
+          "scope": "CLIENT_SCOPE"
+        },
+        "additionalInfo": {
+          "description": "Persist computed sync_status and timestamps as CLIENT attributes (visible on Sync Dashboard)",
+          "layoutX": 1100,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgMetaDataFilterNode",
+        "name": "Filter: OUT_OF_SYNC only",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "return metadata.sync_status === 'OUT_OF_SYNC';"
+        },
+        "additionalInfo": {
+          "description": "Branch: only out-of-sync devices trigger re-send",
+          "layoutX": 1350,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.rpc.TbSendRPCRequestNode",
+        "name": "Re-send setHvac command",
+        "debugMode": true,
+        "configuration": {
+          "timeoutInSeconds": 30
+        },
+        "additionalInfo": {
+          "description": "Re-send HVAC command when HVAC is out of sync",
+          "layoutX": 1600,
+          "layoutY": 100
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Build setHvac RPC payload",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "/**\n * Build southbound RPC payload for HVAC re-sync.\n * Uses desired_hvac from metadata (already loaded from SHARED_SCOPE).\n */\nvar desiredHvac = metadata.desired_hvac || 'OFF';\n\nmsg = {\n    method: 'setHvac',\n    params: desiredHvac\n};\n\nreturn {msg: msg, metadata: metadata, msgType: 'RPC_CALL_FROM_SERVER_TO_DEVICE'};\n"
+        },
+        "additionalInfo": {
+          "description": "Format payload: {method: 'setHvac', params: 'ON'|'OFF'}",
+          "layoutX": 1600,
+          "layoutY": 250
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Build setDimmer RPC payload",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "/**\n * Build southbound RPC payload for dimmer re-sync.\n */\nvar desiredDimmer = parseInt(metadata.desired_dimmer || '50', 10);\n\nmsg = {\n    method: 'setDimmer',\n    params: desiredDimmer\n};\n\nreturn {msg: msg, metadata: metadata, msgType: 'RPC_CALL_FROM_SERVER_TO_DEVICE'};\n"
+        },
+        "additionalInfo": {
+          "description": "Format payload: {method: 'setDimmer', params: 0-100}",
+          "layoutX": 1600,
+          "layoutY": 400
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log sync success",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return 'Sync OK for ' + metadata.deviceName + ': ' + metadata.sync_status;"
+        },
+        "additionalInfo": {
+          "layoutX": 1850,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log sync failure",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return 'Sync FAILED for ' + metadata.deviceName + ': ' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 1850,
+          "layoutY": 400
+        }
+      }
+    ],
+    "connections": [
+      {"fromIndex": 0, "toIndex": 1, "type": "True"},
+      {"fromIndex": 1, "toIndex": 2, "type": "Success"},
+      {"fromIndex": 2, "toIndex": 3, "type": "Success"},
+      {"fromIndex": 3, "toIndex": 4, "type": "Success"},
+      {"fromIndex": 4, "toIndex": 5, "type": "Success"},
+      {"fromIndex": 5, "toIndex": 7, "type": "True"},
+      {"fromIndex": 5, "toIndex": 9, "type": "False"},
+      {"fromIndex": 7, "toIndex": 8, "type": "Success"},
+      {"fromIndex": 8, "toIndex": 6, "type": "Success"},
+      {"fromIndex": 6, "toIndex": 9, "type": "Success"},
+      {"fromIndex": 6, "toIndex": 10, "type": "Failure"}
+    ],
+    "ruleChainConnections": null
+  },
+  "_readme": {
+    "import_instructions": [
+      "1. Open ThingsBoard UI → Rule Chains → Import Rule Chain",
+      "2. Upload this file",
+      "3. Chain this from the Root Rule Chain using a 'Rule Chain' node for POST_ATTRIBUTES_REQUEST messages",
+      "4. Assign the Root Rule Chain to the 'Room' device profile"
+    ],
+    "shadow_state_model": {
+      "desired_state": "SHARED_SCOPE attributes — set by dashboard/operator",
+      "reported_state": "CLIENT_SCOPE attributes — set by device on connect",
+      "sync_status": "CLIENT_SCOPE attribute — computed by this rule chain",
+      "hvac_values": ["ON", "OFF"],
+      "dimmer_range": "0-100 (integer percentage)"
+    }
+  }
+}

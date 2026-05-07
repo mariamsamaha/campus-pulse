@@ -1,0 +1,176 @@
+{
+  "ruleChain": {
+    "name": "Floor Average Temperature Aggregation",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null,
+    "additionalInfo": {
+      "description": "Aggregates temperature telemetry from all Room devices on a Floor and saves the average as floor-level telemetry on the Floor asset. Triggered every time any room device posts telemetry."
+    }
+  },
+  "metadata": {
+    "firstNodeIndex": 0,
+    "nodes": [
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeFilterNode",
+        "name": "Filter: POST_TELEMETRY only",
+        "debugMode": false,
+        "configuration": {
+          "messageTypes": ["POST_TELEMETRY_REQUEST"]
+        },
+        "additionalInfo": {
+          "description": "Pass only telemetry messages from room devices",
+          "layoutX": 100,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Get room_type from Room asset",
+        "debugMode": false,
+        "configuration": {
+          "scope": "SERVER_SCOPE",
+          "attrMapping": {
+            "room_type": "ss_room_type"
+          },
+          "fetchTo": "METADATA",
+          "tellFailureIfAbsent": false
+        },
+        "additionalInfo": {
+          "description": "Read room_type server attribute for metadata enrichment",
+          "layoutX": 350,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.filter.TbCheckMessageNode",
+        "name": "Has temperature key?",
+        "debugMode": false,
+        "configuration": {
+          "checks": [
+            {
+              "key": "temperature",
+              "type": "DATA_KEYS",
+              "value": ""
+            }
+          ]
+        },
+        "additionalInfo": {
+          "description": "Only proceed if temperature is in this telemetry message",
+          "layoutX": 600,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.metadata.TbGetRelatedAttributeNode",
+        "name": "Find parent Floor asset",
+        "debugMode": false,
+        "configuration": {
+          "relationsQuery": {
+            "direction": "TO",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Contains",
+                "entityTypes": ["ASSET"]
+              }
+            ]
+          },
+          "attrMapping": {},
+          "fetchTo": "METADATA",
+          "tellFailureIfAbsent": false
+        },
+        "additionalInfo": {
+          "description": "Traverse Contains relation upward to find the Floor asset",
+          "layoutX": 850,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbCopyAttributesToEntityView",
+        "name": "Aggregate children telemetry",
+        "debugMode": false,
+        "configuration": {},
+        "additionalInfo": {
+          "description": "Placeholder — use Script node below for aggregation logic",
+          "layoutX": 1100,
+          "layoutY": 200
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Compute floor avg temperature",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "/**\n * Floor Average Temperature Script\n *\n * Called after collecting all child room telemetry for this floor.\n * msg.data contains temperature from the triggering device.\n * We tag the message with the floor asset ID for downstream saving.\n *\n * Note: Full aggregation requires the 'Aggregate Latest' pattern.\n * This script emits a ready-to-save floor telemetry message.\n */\nvar temperature = msg.temperature !== undefined ? msg.temperature : null;\n\nif (temperature === null) {\n    return null; // discard\n}\n\n// The floor asset name is stored in metadata by the relation traversal node\nvar floorAssetName = metadata.floorAssetName || 'unknown';\n\n// Build floor telemetry payload\nmsg = {\n    avg_temperature: temperature,  // Will be replaced by true avg in aggregation chain\n    contributing_room: metadata.deviceName || 'unknown',\n    floor_name: floorAssetName,\n    ts: new Date().getTime()\n};\n\nmetadata.targetEntityType = 'ASSET';\nmetadata.targetEntityName = floorAssetName;\n\nreturn {msg: msg, metadata: metadata, msgType: msgType};\n"
+        },
+        "additionalInfo": {
+          "description": "Transform telemetry message to floor-level aggregated payload",
+          "layoutX": 1100,
+          "layoutY": 350
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbSaveTimeseriesNode",
+        "name": "Save avg_temperature to Floor asset",
+        "debugMode": false,
+        "configuration": {
+          "defaultTTL": 0,
+          "skipLatestPersistence": false
+        },
+        "additionalInfo": {
+          "description": "Persist aggregated floor temperature as floor asset timeseries",
+          "layoutX": 1350,
+          "layoutY": 350
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log success",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return 'Floor aggregation saved: ' + JSON.stringify(msg);"
+        },
+        "additionalInfo": {
+          "layoutX": 1600,
+          "layoutY": 350
+        }
+      },
+      {
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log failure",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return 'Floor aggregation FAILED: ' + JSON.stringify(metadata);"
+        },
+        "additionalInfo": {
+          "layoutX": 1600,
+          "layoutY": 200
+        }
+      }
+    ],
+    "connections": [
+      {"fromIndex": 0, "toIndex": 1, "type": "True"},
+      {"fromIndex": 1, "toIndex": 2, "type": "Success"},
+      {"fromIndex": 2, "toIndex": 3, "type": "True"},
+      {"fromIndex": 3, "toIndex": 5, "type": "Success"},
+      {"fromIndex": 3, "toIndex": 8, "type": "Failure"},
+      {"fromIndex": 5, "toIndex": 6, "type": "Success"},
+      {"fromIndex": 6, "toIndex": 7, "type": "Success"},
+      {"fromIndex": 6, "toIndex": 8, "type": "Failure"}
+    ],
+    "ruleChainConnections": null
+  },
+  "_readme": {
+    "import_instructions": [
+      "1. Open ThingsBoard UI → Rule Chains → Import Rule Chain",
+      "2. Upload this file",
+      "3. Set as the root rule chain OR chain from 'Root Rule Chain' via rule chain node",
+      "4. For full server-side aggregation, enable 'Aggregate Latest' on the Floor asset profile",
+      "5. The rule chain must be assigned to the 'Room' device profile"
+    ],
+    "aggregation_note": "ThingsBoard CE does not have a native multi-child aggregation node. This chain captures per-room telemetry and re-saves it tagged with the floor asset. For true averaging across all 20 rooms, use ThingsBoard PE 'Aggregate Latest' node OR use the companion Python aggregation poller (aggregate_floor_telemetry.py)."
+  }
+}

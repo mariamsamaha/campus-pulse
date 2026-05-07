@@ -1,0 +1,249 @@
+{
+  "title": "Room Control Panel",
+  "image": null,
+  "configuration": {
+    "description": "Per-room southbound control panel. HVAC toggle and lighting dimmer. Accessible via polygon click on campus heatmap or Sync Status table.",
+    "widgets": {
+
+      "room-info-widget": {
+        "typeFullFqn": "system.cards.attributes-card",
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "config": {
+          "title": "Room Information",
+          "showTitle": true,
+          "settings": {
+            "labelValueAlignmentHorizontal": "space-between",
+            "labelValueAlignmentVertical": "center"
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "name": "Selected Room",
+              "entityAliasId": "selected-room-alias",
+              "dataKeys": [
+                {"name": "entityName",       "type": "entityField", "label": "Room"},
+                {"name": "room_type",        "type": "attribute",   "label": "Type",          "settings": {"scope": "SERVER_SCOPE"}},
+                {"name": "square_footage",   "type": "attribute",   "label": "Area (sq ft)",  "settings": {"scope": "SERVER_SCOPE"}},
+                {"name": "occupant_capacity","type": "attribute",   "label": "Capacity",      "settings": {"scope": "SERVER_SCOPE"}},
+                {"name": "last_seen",        "type": "attribute",   "label": "Last Seen",     "settings": {"scope": "CLIENT_SCOPE"}},
+                {"name": "sync_status",      "type": "attribute",   "label": "Sync Status",   "settings": {"scope": "CLIENT_SCOPE"}}
+              ]
+            }
+          ]
+        }
+      },
+
+      "hvac-control-widget": {
+        "typeFullFqn": "system.control.round-switch",
+        "type": "rpc",
+        "sizeX": 4,
+        "sizeY": 3,
+        "config": {
+          "title": "HVAC Control",
+          "showTitle": true,
+          "settings": {
+            "onValue": "ON",
+            "offValue": "OFF",
+            "showOnOff": true,
+            "onColor": "#60b4ff",
+            "offColor": "#455a64",
+            "handlerColor": "#ffffff",
+            "disabledOnPending": true,
+            "pendingIndicator": true,
+            "labelColor": "#ffffff",
+            "labelFont": {
+              "family": "Inter, Roboto, sans-serif",
+              "size": 14
+            },
+            "requestTimeout": 10000,
+            "requestPersistent": false
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "name": "Selected Room Device",
+              "entityAliasId": "selected-device-alias",
+              "dataKeys": [
+                {
+                  "name": "reported_hvac",
+                  "type": "attribute",
+                  "label": "HVAC State",
+                  "settings": {"scope": "CLIENT_SCOPE"}
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "onToggle": {
+              "rpc": {
+                "requestType": "twoWayRpc",
+                "method": "setHvac",
+                "paramsFunction": "/* Build setHvac RPC payload\n * Called on toggle click.\n * 'value' is true (ON) or false (OFF) depending on toggle state.\n */\nvar state = value ? 'ON' : 'OFF';\n\n// Update desired state (SHARED attribute) immediately for UI feedback\n// The shadow sync rule chain will detect the diff and track convergence\nreturn state;",
+                "successCallback": "/* On successful RPC ack from device:\n * Update desired_hvac shared attribute.\n */\nvar newState = value ? 'ON' : 'OFF';\nwidgetContext.ctx.attributeService.saveEntityAttributes(\n    widgetContext.ctx.defaultSubscription.firstEntityInfo.entityId,\n    'SHARED_SCOPE',\n    [{key: 'desired_hvac', value: newState}]\n).subscribe();",
+                "failureCallback": "/* Show error notification on RPC failure */\nwidgetContext.showErrorToast('HVAC command failed — device may be offline');"
+              }
+            }
+          }
+        }
+      },
+
+      "dimmer-widget": {
+        "typeFullFqn": "system.control.knob-control",
+        "type": "rpc",
+        "sizeX": 4,
+        "sizeY": 3,
+        "config": {
+          "title": "Lighting Dimmer",
+          "showTitle": true,
+          "settings": {
+            "minValue": 0,
+            "maxValue": 100,
+            "startDeg": -135,
+            "endDeg": 135,
+            "title": "Brightness",
+            "unitTitle": "%",
+            "showTitle": true,
+            "showUnitTitle": true,
+            "showMinMax": true,
+            "backgroundColor": "#1e2d3d",
+            "mainColor": "#60b4ff",
+            "labelsColor": "#aaaaaa",
+            "requestTimeout": 10000,
+            "requestPersistent": false
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "name": "Selected Room Device",
+              "entityAliasId": "selected-device-alias",
+              "dataKeys": [
+                {
+                  "name": "reported_dimmer",
+                  "type": "attribute",
+                  "label": "Dimmer Level",
+                  "settings": {"scope": "CLIENT_SCOPE"}
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "onValueChange": {
+              "rpc": {
+                "requestType": "twoWayRpc",
+                "method": "setDimmer",
+                "paramsFunction": "/* Build setDimmer payload.\n * 'value' is integer 0-100.\n */\nreturn parseInt(value, 10);",
+                "successCallback": "/* On ack: update desired_dimmer shared attribute */\nwidgetContext.ctx.attributeService.saveEntityAttributes(\n    widgetContext.ctx.defaultSubscription.firstEntityInfo.entityId,\n    'SHARED_SCOPE',\n    [{key: 'desired_dimmer', value: parseInt(value, 10)}]\n).subscribe();",
+                "failureCallback": "widgetContext.showErrorToast('Dimmer command failed — device may be offline');"
+              }
+            }
+          }
+        }
+      },
+
+      "room-telemetry-chart": {
+        "typeFullFqn": "system.timeseries.flot.line-chart",
+        "type": "timeseries",
+        "sizeX": 12,
+        "sizeY": 5,
+        "config": {
+          "title": "Room Telemetry — Last 1 Hour",
+          "showTitle": true,
+          "settings": {
+            "smoothLines": true,
+            "shadowSize": 4,
+            "fontColor": "#ffffff",
+            "fontSize": 12,
+            "showLegend": true,
+            "fillLines": true,
+            "fillOpacity": 0.15,
+            "legendConfig": {"position": "bottom", "labelColor": "#aaaaaa"}
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "name": "Selected Room Device",
+              "entityAliasId": "selected-device-alias",
+              "dataKeys": [
+                {"name": "temperature",  "type": "timeseries", "label": "Temperature (°C)", "color": "#ef5350"},
+                {"name": "humidity",     "type": "timeseries", "label": "Humidity (%)",     "color": "#42a5f5"},
+                {"name": "occupancy",    "type": "timeseries", "label": "Occupancy",         "color": "#66bb6a"},
+                {"name": "hvac_state",   "type": "timeseries", "label": "HVAC",              "color": "#ffb74d"},
+                {"name": "dimmer_level", "type": "timeseries", "label": "Dimmer (%)",        "color": "#ce93d8"}
+              ]
+            }
+          ],
+          "timewindow": {
+            "history": {"timewindowMs": 3600000},
+            "selectedTab": 1
+          }
+        }
+      }
+    },
+
+    "states": {
+      "room-control-state": {
+        "name": "Room Control Panel",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "room-info-widget":    {"row": 0, "col": 0,  "sizeX": 4, "sizeY": 3},
+              "hvac-control-widget": {"row": 0, "col": 4,  "sizeX": 4, "sizeY": 3},
+              "dimmer-widget":       {"row": 0, "col": 8,  "sizeX": 4, "sizeY": 3},
+              "room-telemetry-chart":{"row": 3, "col": 0,  "sizeX": 12,"sizeY": 5}
+            },
+            "gridSettings": {
+              "backgroundColor": "#0d1117",
+              "columns": 12,
+              "margin": 10
+            }
+          }
+        }
+      }
+    },
+
+    "entityAliases": {
+      "selected-device-alias": {
+        "id": "selected-device-alias",
+        "alias": "Selected Room Device",
+        "filter": {
+          "type": "relationsQuery",
+          "resolveMultiple": false,
+          "rootStateEntity": true,
+          "stateEntityParamName": "selectedRoom",
+          "direction": "FROM",
+          "maxLevel": 1,
+          "filters": [
+            {"relationType": "Contains", "entityTypes": ["DEVICE"]}
+          ]
+        }
+      },
+      "selected-room-alias": {
+        "id": "selected-room-alias",
+        "alias": "Selected Room Asset",
+        "filter": {
+          "type": "stateEntity",
+          "stateEntityParamName": "selectedRoom"
+        }
+      }
+    }
+  },
+  "_readme": {
+    "rpc_payloads": {
+      "setHvac":   {"method": "setHvac",   "params": "ON|OFF"},
+      "setDimmer": {"method": "setDimmer", "params": "0-100 integer"}
+    },
+    "import_instructions": [
+      "Option A — Embed in campus_main_dashboard.json:",
+      "  This file's 'room-control-state' config was already merged into campus_main_dashboard.json",
+      "  The room control widgets run as a dashboard STATE, not a separate dashboard.",
+      "",
+      "Option B — Standalone dashboard:",
+      "  1. Open ThingsBoard → Dashboards → Import Dashboard",
+      "  2. Upload this file",
+      "  3. Link from campus_main_dashboard via 'Open Dashboard' action on polygon click"
+    ]
+  }
+}

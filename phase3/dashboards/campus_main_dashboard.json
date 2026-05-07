@@ -1,0 +1,343 @@
+{
+  "title": "Campus Pulse — Main Dashboard",
+  "image": null,
+  "mobileHide": false,
+  "mobileOrder": null,
+  "configuration": {
+    "description": "ZC-Main-Campus IoT Digital Twin Dashboard. Includes floor heatmap (image map), room telemetry, southbound controls, and shadow sync status.",
+    "widgets": {
+      "floor-heatmap-widget": {
+        "typeFullFqn": "system.maps.image-map",
+        "type": "latest",
+        "sizeX": 12,
+        "sizeY": 8,
+        "row": 0,
+        "col": 0,
+        "config": {
+          "title": "Floor Heatmap — B01 (Select Floor)",
+          "showTitle": true,
+          "backgroundColor": "#1a1a2e",
+          "color": "rgba(255,255,255,0.87)",
+          "padding": "8px",
+          "settings": {
+            "mapImageUrl": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI4MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iODAwIiBmaWxsPSIjMWEyMDMzIi8+PHRleHQgeD0iNjAwIiB5PSI0MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YTZmYTUiIGZvbnQtc2l6ZT0iMjQiPkZsb29yIFBsYW4gUGxhY2Vob2xkZXIgLS0gUmVwbGFjZSB3aXRoIGFjdHVhbCBmbG9vciBwbGFuIGltYWdlPC90ZXh0Pjwvc3ZnPg==",
+            "useColorFunction": true,
+            "colorFunction": "/* Temperature Heatmap Color Function\n * Maps temperature to blue (cold) → red (hot) gradient\n * Input: data object with 'temperature' key\n * Returns: CSS color string\n */\nvar temp = data.temperature;\nif (typeof temp === 'undefined' || temp === null) {\n    return 'rgba(128,128,128,0.6)'; // grey = no data\n}\ntemp = parseFloat(temp);\n\n// Clamp to expected campus range 16°C – 32°C\nvar minTemp = 16, maxTemp = 32;\nvar ratio = Math.max(0, Math.min(1, (temp - minTemp) / (maxTemp - minTemp)));\n\n// Blue (cold) → Cyan → Green → Yellow → Red (hot)\nvar r, g, b;\nif (ratio < 0.25) {\n    var t = ratio / 0.25;\n    r = 0; g = Math.round(t * 255); b = 255;\n} else if (ratio < 0.5) {\n    var t = (ratio - 0.25) / 0.25;\n    r = 0; g = 255; b = Math.round((1-t)*255);\n} else if (ratio < 0.75) {\n    var t = (ratio - 0.5) / 0.25;\n    r = Math.round(t*255); g = 255; b = 0;\n} else {\n    var t = (ratio - 0.75) / 0.25;\n    r = 255; g = Math.round((1-t)*255); b = 0;\n}\n\nreturn 'rgba(' + r + ',' + g + ',' + b + ',0.75)';",
+            "tooltipFunction": "/* Room Tooltip — shows occupancy, HVAC state, temperature, timestamp */\nvar deviceName = data['entityName'] || 'Unknown';\nvar temp  = data.temperature  !== undefined ? parseFloat(data.temperature).toFixed(1) + '°C' : 'N/A';\nvar occ   = data.occupancy    !== undefined ? data.occupancy + ' persons' : 'N/A';\nvar hvac  = data.hvac_state   !== undefined ? data.hvac_state : 'N/A';\nvar ts    = data['$datasource_timestamp'] ? new Date(data['$datasource_timestamp']).toLocaleTimeString() : 'N/A';\n\nreturn '<div style=\"font-family:Inter,sans-serif;padding:8px;min-width:160px;\">' +\n    '<b style=\"color:#60b4ff\">' + deviceName + '</b><hr style=\"border-color:#333;margin:4px 0\">' +\n    '<span>🌡 Temp: <b>' + temp + '</b></span><br>' +\n    '<span>👥 Occupancy: <b>' + occ + '</b></span><br>' +\n    '<span>❄ HVAC: <b>' + hvac + '</b></span><br>' +\n    '<span style=\"color:#888;font-size:11px\">⏱ Last update: ' + ts + '</span>' +\n    '</div>';",
+            "showTooltip": true,
+            "showLabel": true,
+            "labelFunction": "return data.temperature ? parseFloat(data.temperature).toFixed(1) + '°' : '';",
+            "markerOffsetX": 0.5,
+            "markerOffsetY": 0.5,
+            "polygonKeyName": "coordinates",
+            "usePolygonColorFunction": true,
+            "polygonStrokeColor": "rgba(255,255,255,0.3)",
+            "polygonStrokeWeight": 1,
+            "polygonStrokeOpacity": 0.8,
+            "polygonFillOpacity": 0.7,
+            "defaultPolygonStrokeColor": "#607d8b",
+            "defaultPolygonFillColor": "rgba(96,125,139,0.4)"
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "name": "Floor Rooms",
+              "entityAliasId": "floor-rooms-alias",
+              "filterId": null,
+              "dataKeys": [
+                {"name": "temperature",  "type": "timeseries",   "label": "Temperature",  "color": "#60b4ff"},
+                {"name": "humidity",     "type": "timeseries",   "label": "Humidity",     "color": "#4dd0e1"},
+                {"name": "occupancy",    "type": "timeseries",   "label": "Occupancy",    "color": "#81c784"},
+                {"name": "hvac_state",   "type": "timeseries",   "label": "HVAC State",   "color": "#ffb74d"},
+                {"name": "coordinates_x","type": "attribute",    "label": "Coord X",      "color": "#e0e0e0", "settings": {"scope": "SERVER_SCOPE"}},
+                {"name": "coordinates_y","type": "attribute",    "label": "Coord Y",      "color": "#e0e0e0", "settings": {"scope": "SERVER_SCOPE"}},
+                {"name": "room_type",    "type": "attribute",    "label": "Room Type",    "color": "#ce93d8", "settings": {"scope": "SERVER_SCOPE"}}
+              ]
+            }
+          ],
+          "actions": {
+            "polygonClick": [
+              {
+                "id": "open-room-controls",
+                "name": "Open Room Controls",
+                "icon": "settings",
+                "type": "openDashboardState",
+                "targetDashboardStateId": "room-control-state",
+                "setEntityId": true,
+                "stateEntityParamName": "selectedRoom"
+              }
+            ]
+          },
+          "timewindow": {
+            "realtime": {"interval": 5000},
+            "selectedTab": 0
+          }
+        }
+      },
+
+      "floor-avg-temperature-widget": {
+        "typeFullFqn": "system.timeseries.flot.line-chart",
+        "type": "timeseries",
+        "sizeX": 6,
+        "sizeY": 4,
+        "row": 8,
+        "col": 0,
+        "config": {
+          "title": "Floor Average Temperature (All Floors)",
+          "showTitle": true,
+          "settings": {
+            "smoothLines": true,
+            "shadowSize": 3,
+            "fontColor": "#ffffff",
+            "fontSize": 12,
+            "showLegend": true,
+            "legendConfig": {"position": "bottom", "labelColor": "#aaaaaa"}
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "name": "B01-F01 Avg Temp",
+              "entityAliasId": "floor-f01-alias",
+              "dataKeys": [{"name": "avg_temperature", "type": "timeseries", "label": "F01 Avg °C", "color": "#60b4ff"}]
+            },
+            {
+              "type": "entity",
+              "name": "B01-F02 Avg Temp",
+              "entityAliasId": "floor-f02-alias",
+              "dataKeys": [{"name": "avg_temperature", "type": "timeseries", "label": "F02 Avg °C", "color": "#4dd0e1"}]
+            },
+            {
+              "type": "entity",
+              "name": "B01-F03 Avg Temp",
+              "entityAliasId": "floor-f03-alias",
+              "dataKeys": [{"name": "avg_temperature", "type": "timeseries", "label": "F03 Avg °C", "color": "#81c784"}]
+            }
+          ],
+          "timewindow": {"realtime": {"interval": 30000}, "selectedTab": 0}
+        }
+      },
+
+      "campus-kpis-widget": {
+        "typeFullFqn": "system.cards.entities-table",
+        "type": "latest",
+        "sizeX": 6,
+        "sizeY": 4,
+        "row": 8,
+        "col": 6,
+        "config": {
+          "title": "Campus KPIs — Live",
+          "showTitle": true,
+          "settings": {
+            "enableSearch": false,
+            "enableSelectColumnDisplay": false,
+            "defaultPageSize": 10,
+            "displayPagination": false,
+            "cellButtonAction": []
+          },
+          "datasources": [
+            {
+              "type": "entityType",
+              "name": "Floors",
+              "entityType": "ASSET",
+              "entityFilter": {"type": "assetType", "assetType": "Floor"},
+              "dataKeys": [
+                {"name": "entityLabel",      "type": "entityField",  "label": "Floor"},
+                {"name": "avg_temperature",  "type": "timeseries",   "label": "Avg Temp (°C)"},
+                {"name": "avg_humidity",     "type": "timeseries",   "label": "Avg Humidity (%)"},
+                {"name": "total_occupancy",  "type": "timeseries",   "label": "Total Occupancy"},
+                {"name": "reporting_devices","type": "timeseries",   "label": "Active Devices"}
+              ]
+            }
+          ]
+        }
+      },
+
+      "sync-status-widget": {
+        "typeFullFqn": "system.cards.entities-table",
+        "type": "latest",
+        "sizeX": 12,
+        "sizeY": 6,
+        "row": 12,
+        "col": 0,
+        "config": {
+          "title": "🔄 Shadow Sync Status — All Devices",
+          "showTitle": true,
+          "settings": {
+            "enableSearch": true,
+            "enableSelectColumnDisplay": true,
+            "defaultPageSize": 20,
+            "displayPagination": true,
+            "useRowStyleFunction": true,
+            "rowStyleFunction": "/* Highlight out-of-sync rows in red */\nif (entity.sync_status === 'OUT_OF_SYNC') {\n    return {backgroundColor: 'rgba(244,67,54,0.15)', borderLeft: '3px solid #f44336'};\n} else if (entity.sync_status === 'PENDING') {\n    return {backgroundColor: 'rgba(255,152,0,0.15)', borderLeft: '3px solid #ff9800'};\n}\nreturn {};",
+            "cellButtonAction": [
+              {
+                "columnTitle": "Controls",
+                "cellButtonIcon": "settings",
+                "cellButtonLabel": "Open Controls",
+                "customHtml": "",
+                "actionDescriptor": {
+                  "type": "openDashboardState",
+                  "targetDashboardStateId": "room-control-state",
+                  "setEntityId": true,
+                  "stateEntityParamName": "selectedRoom"
+                }
+              }
+            ]
+          },
+          "actions": {
+            "rowClick": [
+              {
+                "id": "row-click-to-controls",
+                "name": "Navigate to Controls",
+                "icon": "settings",
+                "type": "openDashboardState",
+                "targetDashboardStateId": "room-control-state",
+                "setEntityId": true,
+                "stateEntityParamName": "selectedRoom"
+              }
+            ]
+          },
+          "datasources": [
+            {
+              "type": "entityType",
+              "name": "All Room Devices",
+              "entityType": "DEVICE",
+              "entityFilter": {"type": "deviceType", "deviceType": "room-sensor"},
+              "dataKeys": [
+                {"name": "entityName",       "type": "entityField",  "label": "Device Name"},
+                {"name": "last_seen",        "type": "attribute",    "label": "Last Seen",       "settings": {"scope": "CLIENT_SCOPE"}},
+                {"name": "desired_hvac",     "type": "attribute",    "label": "Desired HVAC",    "settings": {"scope": "SHARED_SCOPE"}},
+                {"name": "reported_hvac",    "type": "attribute",    "label": "Reported HVAC",   "settings": {"scope": "CLIENT_SCOPE"}},
+                {"name": "desired_dimmer",   "type": "attribute",    "label": "Desired Dimmer",  "settings": {"scope": "SHARED_SCOPE"}},
+                {"name": "reported_dimmer",  "type": "attribute",    "label": "Reported Dimmer", "settings": {"scope": "CLIENT_SCOPE"}},
+                {"name": "sync_status",      "type": "attribute",    "label": "Sync Status",     "settings": {"scope": "CLIENT_SCOPE"}}
+              ]
+            }
+          ],
+          "timewindow": {"realtime": {"interval": 5000}, "selectedTab": 0}
+        }
+      }
+    },
+
+    "states": {
+      "default": {
+        "name": "Campus Overview",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "floor-heatmap-widget": {"row": 0, "col": 0, "sizeX": 12, "sizeY": 8},
+              "floor-avg-temperature-widget": {"row": 8, "col": 0, "sizeX": 6, "sizeY": 4},
+              "campus-kpis-widget": {"row": 8, "col": 6, "sizeX": 6, "sizeY": 4},
+              "sync-status-widget": {"row": 12, "col": 0, "sizeX": 12, "sizeY": 6}
+            },
+            "gridSettings": {
+              "backgroundColor": "#0d1117",
+              "columns": 12,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundSizeMode": "100%"
+            }
+          }
+        }
+      },
+
+      "room-control-state": {
+        "name": "Room Control Panel",
+        "root": false,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "room-info-widget":   {"row": 0, "col": 0,  "sizeX": 4, "sizeY": 3},
+              "hvac-control-widget":{"row": 0, "col": 4,  "sizeX": 4, "sizeY": 3},
+              "dimmer-widget":      {"row": 0, "col": 8,  "sizeX": 4, "sizeY": 3},
+              "room-telemetry-chart":{"row": 3, "col": 0, "sizeX": 12,"sizeY": 5}
+            },
+            "gridSettings": {
+              "backgroundColor": "#0d1117",
+              "columns": 12
+            }
+          }
+        }
+      }
+    },
+
+    "entityAliases": {
+      "floor-rooms-alias": {
+        "id": "floor-rooms-alias",
+        "alias": "Selected Floor Rooms",
+        "filter": {
+          "type": "relationsQuery",
+          "resolveMultiple": true,
+          "rootEntity": {
+            "entityType": "ASSET",
+            "entityName": "B01-F01"
+          },
+          "direction": "FROM",
+          "maxLevel": 1,
+          "filters": [
+            {"relationType": "Contains", "entityTypes": ["DEVICE"]}
+          ]
+        }
+      },
+      "floor-f01-alias": {
+        "id": "floor-f01-alias",
+        "alias": "Floor B01-F01",
+        "filter": {
+          "type": "singleEntity",
+          "singleEntity": {"entityType": "ASSET", "id": null, "name": "B01-F01"}
+        }
+      },
+      "floor-f02-alias": {
+        "id": "floor-f02-alias",
+        "alias": "Floor B01-F02",
+        "filter": {
+          "type": "singleEntity",
+          "singleEntity": {"entityType": "ASSET", "id": null, "name": "B01-F02"}
+        }
+      },
+      "floor-f03-alias": {
+        "id": "floor-f03-alias",
+        "alias": "Floor B01-F03",
+        "filter": {
+          "type": "singleEntity",
+          "singleEntity": {"entityType": "ASSET", "id": null, "name": "B01-F03"}
+        }
+      },
+      "selected-room-alias": {
+        "id": "selected-room-alias",
+        "alias": "Selected Room",
+        "filter": {
+          "type": "stateEntity",
+          "stateEntityParamName": "selectedRoom"
+        }
+      }
+    },
+
+    "filters": {},
+
+    "timewindow": {
+      "realtime": {"interval": 5000},
+      "selectedTab": 0
+    }
+  },
+  "_readme": {
+    "import_instructions": [
+      "1. Open ThingsBoard UI → Dashboards → Import Dashboard",
+      "2. Upload this file (campus_main_dashboard.json)",
+      "3. Update entity aliases to use actual entity IDs from your TB instance:",
+      "   - Set 'B01-F01' → actual B01-F01 asset ID in floor-f01-alias",
+      "   - Repeat for F02, F03 (add more as needed)",
+      "4. Upload an actual floor plan image and set mapImageUrl in the heatmap widget settings",
+      "5. Set polygon coordinates using coordinates_x/coordinates_y from room SERVER_SCOPE attributes",
+      "6. Ensure the 'Room' device profile is assigned to all 200 devices"
+    ],
+    "polygon_setup_note": "Each room polygon must be defined in the Image Map widget as a GeoJSON polygon. Use coordinates_x and coordinates_y from room server-side attributes as the center point, then define bounding box polygons (110x70px per room based on the topology grid). The shadow_provisioner.py adds polygon_coords as a SERVER attribute automatically.",
+    "color_thresholds": {
+      "blue_cold": "16°C",
+      "green_comfortable": "22°C",
+      "yellow_warm": "26°C",
+      "red_hot": "32°C"
+    }
+  }
+}

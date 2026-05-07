@@ -105,7 +105,10 @@ class TBClient:
         resp = requests.post(f"{self.base}{path}", headers=self._headers,
                              json=body, timeout=10)
         resp.raise_for_status()
-        return resp.json()
+        try:
+            return resp.json()
+        except Exception:
+            return {}
 
     def _post_attr(self, path: str, body: dict) -> None:
         if self.dry:
@@ -189,6 +192,24 @@ class TBClient:
         self._post("/api/relation", body)
         time.sleep(_RATE_DELAY)
 
+    def upsert_device(self, name: str, device_type: str = "room-sensor") -> str:
+        """Create device if it doesn't exist; return its ID."""
+        existing_id = self.find_device_by_name(name)
+        if existing_id:
+            log.debug("Device already exists: %s (%s)", name, existing_id)
+            return existing_id
+
+        if self.dry:
+            log.info("[DRY-RUN] create_device(%s)", name)
+            return "dry-run-device-id"
+
+        body = {"name": name, "type": device_type, "label": name}
+        result = self._post("/api/device", body)
+        device_id = result.get("id", {}).get("id", "dry-run-id")
+        log.info("  Created device %-30s  [%s]  id=%s", name, device_type, device_id)
+        time.sleep(_RATE_DELAY)
+        return device_id
+
 
 # ─────────────────────── provisioner ────────────────────────────────────────
 
@@ -235,11 +256,15 @@ def provision(client: TBClient, campus: CampusAsset) -> None:
                 # ── 6. Device → Room "Contains" relation ──────────────────
                 for device_name in room.devices:
                     device_id = client.find_device_by_name(device_name)
+                    if not device_id:
+                        # Device doesn't exist yet (simulator hasn't connected).
+                        # Create it now so relations and shadow state can be set.
+                        device_id = client.upsert_device(device_name, "room-sensor")
                     if device_id:
                         client.add_device_relation(r_id, device_id)
                         log.debug("    Linked device %s → %s", device_name, room.asset_name)
                     else:
-                        log.warning("    Device NOT FOUND in TB: %s", device_name)
+                        log.warning("    Device STILL NOT FOUND after creation: %s", device_name)
 
     rooms_provisioned = len(all_rooms(campus))
     log.info("=== Provisioning complete: %d rooms, %d total assets ===",
